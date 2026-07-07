@@ -5,14 +5,14 @@
 local BASE = "https://raw.githubusercontent.com/risxt/myarc2/main/"
 
 local function loadRemote(path)
-    local source = game:HttpGet(BASE .. path)
+    local source = game:HttpGet(BASE .. path .. "?v=" .. tostring(os.time()))
     local fn, err = loadstring(source)
     if not fn then error("Compile failed: " .. path .. " | " .. tostring(err)) end
     return fn()
 end
 
 local function loadRemoteFunction(path)
-    local source = game:HttpGet(BASE .. path)
+    local source = game:HttpGet(BASE .. path .. "?v=" .. tostring(os.time()))
     local fn, err = loadstring(source)
     if not fn then error("Compile failed: " .. path .. " | " .. tostring(err)) end
     return fn

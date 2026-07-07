@@ -12,7 +12,7 @@ local function cacheName(path)
 end
 
 function ModuleLoader.fetch(path)
-    local url = ModuleLoader.BaseUrl .. path
+    local url = ModuleLoader.BaseUrl .. path .. "?v=" .. tostring(os.time())
     local ok, body = pcall(function()
         return game:HttpGet(url)
     end)
