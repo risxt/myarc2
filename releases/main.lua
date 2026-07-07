@@ -1,4 +1,4 @@
-﻿-- main.lua
+-- main.lua
 -- Hybrid live entrypoint for GAG2.
 -- Loads modular runtime first, then runs current full hub monolith as fallback until feature migration is complete.
 
@@ -106,7 +106,17 @@ UIRegistry.init({ Logger = Logger })
 
 local MonolithUI = ModuleLoader.load("src/UI/MonolithUI.lua")
 if MonolithUI then
-    MonolithUI.init({ Cfg = ConfigService.getCfg(), UIRegistry = UIRegistry, ToggleBinder = ToggleBinder })
+    print("[Main] Starting MonolithUI...")
+    local uiOk, uiErr = pcall(function()
+        MonolithUI.init({ Cfg = ConfigService.getCfg(), UIRegistry = UIRegistry, ToggleBinder = ToggleBinder })
+    end)
+    if uiOk then
+        print("[Main] MonolithUI started")
+    else
+        warn("[Main] MonolithUI failed: " .. tostring(uiErr))
+    end
+else
+    warn("[Main] MonolithUI module returned nil")
 end
 ToggleBinder.init({ Logger = Logger, ConfigService = ConfigService })
 AutoCollectController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, Cfg = ConfigService.getCfg(), LocalPlayer = runtime.LocalPlayer, Networking = Networking, Workspace = workspace })

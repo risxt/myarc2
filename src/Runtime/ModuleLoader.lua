@@ -1,11 +1,11 @@
-﻿-- ModuleLoader.lua
+-- ModuleLoader.lua
 -- Real GitHub module loader for GAG2 modular entrypoint.
 
 local ModuleLoader = {}
 
 ModuleLoader.BaseUrl = "https://raw.githubusercontent.com/risxt/myarc2/main/"
 ModuleLoader.CachePrefix = "GAG2_cache_"
-ModuleLoader.UseCache = true
+ModuleLoader.UseCache = false -- disabled during dev to force fresh fetch
 
 local function cacheName(path)
     return ModuleLoader.CachePrefix .. path:gsub("[^%w_%-%.]", "_")
@@ -37,10 +37,13 @@ function ModuleLoader.fetch(path)
 end
 
 function ModuleLoader.load(path)
+    print("[ModuleLoader] Loading: " .. path)
     local source = ModuleLoader.fetch(path)
     local fn, err = loadstring(source)
     if not fn then error("GAG2 compile failed for " .. tostring(path) .. ": " .. tostring(err)) end
-    return fn()
+    local result = fn()
+    print("[ModuleLoader] Loaded: " .. path .. " (" .. #source .. " bytes)")
+    return result
 end
 
 return ModuleLoader
