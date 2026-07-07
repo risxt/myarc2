@@ -17,7 +17,11 @@ FeatureRegistry.Features = {
     Tools = "monolith",
     ESP = "monolith",
     Weather = "monolith",
-    Overlays = "monolith",
+    Overlays = "partial",
+    StackFarm = "partial",
+    Steal = "partial",
+    LocalPlayer = "partial",
+    Misc = "partial",
 }
 
 function FeatureRegistry.init(deps)
@@ -50,3 +54,4 @@ function FeatureRegistry.percent()
 end
 
 return FeatureRegistry
+

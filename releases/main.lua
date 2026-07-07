@@ -29,6 +29,7 @@ local Logger = ModuleLoader.load("src/Core/Logger.lua")
 local ApsState = ModuleLoader.load("src/Core/ApsState.lua")
 local ConfigService = ModuleLoader.load("src/Core/ConfigService.lua")
 local FeatureRegistry = ModuleLoader.load("src/Core/FeatureRegistry.lua")
+local FeatureParityChecklist = ModuleLoader.load("src/Core/FeatureParityChecklist.lua")
 local HttpRequestService = ModuleLoader.load("src/Services/HttpRequestService.lua")
 local RemoteService = ModuleLoader.load("src/Services/RemoteService.lua")
 local GardenService = ModuleLoader.load("src/Services/GardenService.lua")
@@ -47,12 +48,18 @@ local PetsController = ModuleLoader.load("src/Controllers/PetsController.lua")
 local ToolAutomationController = ModuleLoader.load("src/Controllers/ToolAutomationController.lua")
 local WeatherController = ModuleLoader.load("src/Controllers/WeatherController.lua")
 local OverlayController = ModuleLoader.load("src/Controllers/OverlayController.lua")
+local StackFarmController = ModuleLoader.load("src/Controllers/StackFarmController.lua")
+local StealController = ModuleLoader.load("src/Controllers/StealController.lua")
+local LocalPlayerController = ModuleLoader.load("src/Controllers/LocalPlayerController.lua")
+local MiscController = ModuleLoader.load("src/Controllers/MiscController.lua")
 local ApsController = ModuleLoader.load("src/Controllers/ApsController.lua")
 
 
 FeatureRegistry.init({ Logger = Logger })
+FeatureParityChecklist.init({ Logger = Logger })
 MonolithBridge.init({ Logger = Logger, ModuleLoader = ModuleLoader, fallbackPath = "releases/gag2.live.lua", enabled = true })
 MigrationGuard.init({ Logger = Logger, FeatureRegistry = FeatureRegistry,
+    FeatureParityChecklist = FeatureParityChecklist,
     MonolithBridge = MonolithBridge,
     MigrationGuard = MigrationGuard,
     RuntimeDiagnostics = RuntimeDiagnostics, MonolithBridge = MonolithBridge })
@@ -75,6 +82,10 @@ PetsController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
 ToolAutomationController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
 WeatherController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
 OverlayController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
+StackFarmController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
+StealController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
+LocalPlayerController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, LocalPlayer = runtime.LocalPlayer })
+MiscController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
 ApsController.init({
     Logger = Logger,
     ConfigService = ConfigService,
@@ -92,6 +103,7 @@ local GAG2 = {
     ApsState = ApsState,
     ConfigService = ConfigService,
     FeatureRegistry = FeatureRegistry,
+    FeatureParityChecklist = FeatureParityChecklist,
     MonolithBridge = MonolithBridge,
     MigrationGuard = MigrationGuard,
     RuntimeDiagnostics = RuntimeDiagnostics,
@@ -113,10 +125,14 @@ local GAG2 = {
     ToolAutomationController = ToolAutomationController,
     WeatherController = WeatherController,
     OverlayController = OverlayController,
+    StackFarmController = StackFarmController,
+    StealController = StealController,
+    LocalPlayerController = LocalPlayerController,
+    MiscController = MiscController,
     ApsController = ApsController,
     ModularLive = true,
     FullyMigrated = false,
-    MigrationPercent = 60,
+    MigrationPercent = 70,
 }
 
 _G.GAG2 = GAG2
@@ -133,6 +149,7 @@ end
 
 Logger.info("Main", "Monolith fallback completed/started")
 return GAG2
+
 
 
 
