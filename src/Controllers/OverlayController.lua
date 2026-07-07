@@ -47,7 +47,22 @@ local function tryPetESP(part)
     local col=RARITY_COLORS[PET_RARITY[species] or "Common"] or Color3.new(1,1,1); local label=size~="" and (size.." "..species) or species; makeLabel(part,label,col)
 end
 -- WEATHER HUD LOGIC
-local function mkCS(...) local args,kps={},{}; for i=1,#args,2 do kps[#kps+1]=ColorSequenceKeypoint.new(args[i],args[i+1]) end; return ColorSequence.new(kps) end
+local function mkCS(...)
+    local args, kps = {...}, {}
+    for i = 1, #args, 2 do
+        if args[i] ~= nil and args[i + 1] ~= nil then
+            kps[#kps + 1] = ColorSequenceKeypoint.new(args[i], args[i + 1])
+        end
+    end
+    if #kps < 2 then
+        local fallback = Color3.fromRGB(255, 255, 255)
+        kps = {
+            ColorSequenceKeypoint.new(0, fallback),
+            ColorSequenceKeypoint.new(1, fallback),
+        }
+    end
+    return ColorSequence.new(kps)
+end
 local PRED_TYPES={{name="Sunset",vec="rbxassetid://86217612022586",grad=mkCS(0,Color3.fromRGB(180,70,0),0.5,Color3.fromRGB(255,140,20),1,Color3.fromRGB(180,70,0))},{name="Moon",vec="rbxassetid://76206945378403",grad=mkCS(0,Color3.fromRGB(7,61,159),1,Color3.fromRGB(7,61,159))},{name="Goldmoon",vec="rbxassetid://84902063004871",grad=mkCS(0,Color3.fromRGB(120,80,0),0.5,Color3.fromRGB(220,160,0),1,Color3.fromRGB(120,80,0))},{name="Bloodmoon",vec="rbxassetid://72350957717841",grad=mkCS(0,Color3.fromRGB(170,0,0),0.5,Color3.fromRGB(255,0,0),1,Color3.fromRGB(170,0,0))},{name="Rainbow Moon",vec="rbxassetid://71907919634074",grad=mkCS(0,Color3.fromRGB(255,154,0),0.111,Color3.fromRGB(184,255,0),0.222,Color3.fromRGB(29,255,17),0.333,Color3.fromRGB(0,254,154),0.444,Color3.fromRGB(0,184,255),0.555,Color3.fromRGB(17,26,255),0.666,Color3.fromRGB(158,0,255),0.777,Color3.fromRGB(253,0,184),0.888,Color3.fromRGB(255,12,28),1,Color3.fromRGB(255,154,0))}}
 local function makeCard(wt,parent)
     local card=Instance.new("ImageLabel"); card.Name="_Pred_"..wt.name; card.BackgroundColor3=Color3.new(1,1,1); card.BackgroundTransparency=0; card.Size=UDim2.new(0.0589,0,0.5226,0); card.LayoutOrder=0; card.Parent=parent; local ar=Instance.new("UIAspectRatioConstraint",card); ar.AspectRatio=1; local grad=Instance.new("UIGradient",card); grad.Color=wt.grad; local stroke=Instance.new("UIStroke",card); stroke.Color=Color3.fromRGB(0,18,54); stroke.Thickness=0.035; local bevel=Instance.new("ImageLabel",card); bevel.Name="BevelEffect"; bevel.AnchorPoint=Vector2.new(0.5,0.5); bevel.Position=UDim2.new(0.5,0,0.5,0); bevel.Size=UDim2.new(1,0,1,0); bevel.BackgroundTransparency=1; bevel.Image="rbxassetid://112886786873408"; bevel.ImageTransparency=0.05; local inlet=Instance.new("ImageLabel",card); inlet.Name="InletTexture"; inlet.AnchorPoint=Vector2.new(0.5,0.5); inlet.Position=UDim2.new(0.5,0,0.5,0); inlet.Size=UDim2.new(1,0,1,0); inlet.BackgroundTransparency=1; inlet.Image="rbxassetid://118449132151095"; inlet.ImageTransparency=0.64; local vec=Instance.new("ImageLabel",card); vec.Name="Vector"; vec.AnchorPoint=Vector2.new(0.5,0.5); vec.Position=UDim2.new(0.5,0,0.5,0); vec.Size=UDim2.new(0.8,0,0.8,0); vec.BackgroundTransparency=1; vec.Image=wt.vec; vec.ZIndex=1
