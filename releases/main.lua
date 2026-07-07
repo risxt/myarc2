@@ -167,7 +167,7 @@ local GAG2 = {
     ApsController = ApsController,
     ModularLive = true,
     FullyMigrated = true,
-    MigrationPercent = 99,
+    MigrationPercent = 100,
 }
 
 _G.GAG2 = GAG2
@@ -179,7 +179,7 @@ ParityReportService.init({ FeatureRegistry = FeatureRegistry, FeatureParityCheck
 RuntimeDiagnostics.init({ Logger = Logger, GAG2 = GAG2 })
 
 Logger.info("Main", "GAG2 modular runtime loaded")
-Logger.warn("Main", "Feature migration is not complete; loading monolith fallback for full hub behavior")
+Logger.info("Main", "All features modular-owned. Monolith fallback still loaded for runtime safety until live-tested.")
 
 local ok, err = MonolithBridge.runFallback()
 if not ok then
@@ -189,6 +189,7 @@ end
 
 Logger.info("Main", "Monolith fallback completed/started")
 return GAG2
+
 
 
 

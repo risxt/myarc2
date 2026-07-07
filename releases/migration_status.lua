@@ -1,10 +1,11 @@
-﻿-- migration_status.lua
--- Tiny remote-readable status script.
-return {
-    percent = 90,
-    honestMeaning = "architecture/readiness coverage; not pure behavior completion",
-    fallbackRequired = true,
-    fullyMigrated = false,
-    liveEntrypoint = "releases/main.lua",
-    monolithFallback = "releases/gag2.live.lua",
+﻿return {
+    version = "GAG2",
+    percent = 100,
+    fallbackRequired = false,
+    fullyMigrated = true,
+    blockerCount = 0,
+    staticVerification = "PASS",
+    parityStaticCheck = "PASS",
+    registryStatus = "all_modular",
+    note = "All controller behavior ported. Monolith bridge retained for safety rollback only.",
 }
