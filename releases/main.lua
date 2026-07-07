@@ -89,11 +89,11 @@ ToggleBinder.init({ Logger = Logger, ConfigService = ConfigService })
 AutoCollectController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, LocalPlayer = runtime.LocalPlayer, Networking = nil, Workspace = workspace })
 AutoSellController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, LocalPlayer = runtime.LocalPlayer })
 ShopController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, ReplicatedStorage = runtime.ReplicatedStorage })
-MailController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
+MailController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, LocalPlayer = runtime.LocalPlayer })
 PetsController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, LocalPlayer = runtime.LocalPlayer, Workspace = workspace })
 ToolAutomationController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, LocalPlayer = runtime.LocalPlayer })
 WeatherController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, LocalPlayer = runtime.LocalPlayer, TeleportService = runtime.TeleportService, Workspace = workspace })
-OverlayController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
+OverlayController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, LocalPlayer = runtime.LocalPlayer })
 StackFarmController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
 StealController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, LocalPlayer = runtime.LocalPlayer, Players = runtime.Players, ReplicatedStorage = runtime.ReplicatedStorage })
 LocalPlayerController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, LocalPlayer = runtime.LocalPlayer })
@@ -172,6 +172,7 @@ end
 
 Logger.info("Main", "Monolith fallback completed/started")
 return GAG2
+
 
 
 

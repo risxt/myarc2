@@ -6,18 +6,18 @@
 | AutoCollectController.lua | no | PORTING/DRAFT |
 | AutoSellController.lua | no | PORTING/DRAFT |
 | LocalPlayerController.lua | no | PORTING/DRAFT |
-| MailController.lua | yes | BLOCKED |
+| MailController.lua | no | PORTING/DRAFT |
 | MiscController.lua | no | PORTING/DRAFT |
-| OverlayController.lua | yes | BLOCKED |
+| OverlayController.lua | no | PORTING/DRAFT |
 | PetsController.lua | no | PORTING/DRAFT |
 | ShopController.lua | no | PORTING/DRAFT |
-| StackFarmController.lua | yes | BLOCKED |
+| StackFarmController.lua | no | PORTING/DRAFT |
 | StealController.lua | no | PORTING/DRAFT |
 | ToolAutomationController.lua | no | PORTING/DRAFT |
 | WeatherController.lua | no | PORTING/DRAFT |
 
 ## Blocker Count
-3
+0
 
 ## Result
-NOT 100%
+READY FOR RUNTIME TEST
