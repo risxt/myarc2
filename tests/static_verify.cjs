@@ -1,8 +1,22 @@
 ﻿const fs = require('fs');
 const path = require('path');
-const root = path.join(process.cwd(), 'GAG2');
+
+function findRoot() {
+  const cwd = process.cwd();
+  if (fs.existsSync(path.join(cwd, 'src')) && fs.existsSync(path.join(cwd, 'releases'))) return cwd;
+  if (fs.existsSync(path.join(cwd, 'GAG2', 'src'))) return path.join(cwd, 'GAG2');
+  throw new Error('Cannot find GAG2 root from ' + cwd);
+}
+
+const root = findRoot();
 const files = [];
-function walk(dir){ for(const e of fs.readdirSync(dir,{withFileTypes:true})){ const p=path.join(dir,e.name); if(e.isDirectory()) walk(p); else if(e.name.endsWith('.lua')) files.push(p); }}
+function walk(dir){
+  for(const e of fs.readdirSync(dir,{withFileTypes:true})){
+    const p=path.join(dir,e.name);
+    if(e.isDirectory()) walk(p);
+    else if(e.name.endsWith('.lua')) files.push(p);
+  }
+}
 walk(path.join(root,'src'));
 let report = [];
 let ok = true;

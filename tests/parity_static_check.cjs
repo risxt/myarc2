@@ -1,10 +1,16 @@
 ﻿const fs = require('fs');
 const path = require('path');
-const root = process.cwd();
-const oldFile = path.join(root, 'gag2.lua');
-const newGarden = path.join(root, 'GAG2/src/Services/GardenService.lua');
-const newSafety = path.join(root, 'GAG2/src/Services/ApsSafetyService.lua');
-const newWebhook = path.join(root, 'GAG2/src/Services/WebhookService.lua');
+function findRoot() {
+  const cwd = process.cwd();
+  if (fs.existsSync(path.join(cwd, 'src')) && fs.existsSync(path.join(cwd, 'releases'))) return cwd;
+  if (fs.existsSync(path.join(cwd, 'GAG2', 'src'))) return path.join(cwd, 'GAG2');
+  throw new Error('Cannot find GAG2 root from ' + cwd);
+}
+const root = findRoot();
+const oldFile = path.join(root, '..', 'gag2.lua');
+const newGarden = path.join(root, 'src/Services/GardenService.lua');
+const newSafety = path.join(root, 'src/Services/ApsSafetyService.lua');
+const newWebhook = path.join(root, 'src/Services/WebhookService.lua');
 const old = fs.readFileSync(oldFile, 'utf8');
 const garden = fs.readFileSync(newGarden, 'utf8');
 const safety = fs.readFileSync(newSafety, 'utf8');
@@ -35,6 +41,6 @@ for (const [name, oldOk, newOk] of checks) {
   md += `| ${name} | ${oldOk ? 'yes' : 'no'} | ${newOk ? 'yes' : 'no'} | ${ok ? 'PASS' : 'REVIEW'} |\n`;
 }
 md += `\n## Overall\n\n${pass ? 'PASS' : 'REVIEW REQUIRED'}\n`;
-fs.writeFileSync(path.join(root, 'GAG2/tests/parity_static_check.md'), md, 'utf8');
+fs.writeFileSync(path.join(root, 'tests/parity_static_check.md'), md, 'utf8');
 console.log(md);
 process.exit(pass ? 0 : 1);

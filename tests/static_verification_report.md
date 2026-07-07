@@ -77,6 +77,27 @@
 - apsResume=false refs: 0
 - returns module: true
 
+## src/Services/PlantingService.lua
+- teleport refs: 0
+- reverse const: false
+- apsResume=true refs: 0
+- apsResume=false refs: 0
+- returns module: true
+
+## src/Services/PositionService.lua
+- teleport refs: 0
+- reverse const: false
+- apsResume=true refs: 0
+- apsResume=false refs: 0
+- returns module: true
+
+## src/Services/SprinklerService.lua
+- teleport refs: 0
+- reverse const: false
+- apsResume=true refs: 0
+- apsResume=false refs: 0
+- returns module: true
+
 ## src/Services/WebhookService.lua
 - teleport refs: 0
 - reverse const: false
