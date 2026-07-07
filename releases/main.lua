@@ -92,7 +92,7 @@ ShopController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, Replic
 MailController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
 PetsController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, LocalPlayer = runtime.LocalPlayer, Workspace = workspace })
 ToolAutomationController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
-WeatherController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
+WeatherController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, LocalPlayer = runtime.LocalPlayer, TeleportService = runtime.TeleportService, Workspace = workspace })
 OverlayController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
 StackFarmController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
 StealController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, LocalPlayer = runtime.LocalPlayer, Players = runtime.Players, ReplicatedStorage = runtime.ReplicatedStorage })
@@ -172,6 +172,7 @@ end
 
 Logger.info("Main", "Monolith fallback completed/started")
 return GAG2
+
 
 
 
