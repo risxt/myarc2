@@ -25,6 +25,9 @@ local MonolithBridge = ModuleLoader.load("src/Runtime/MonolithBridge.lua")
 local MigrationGuard = ModuleLoader.load("src/Runtime/MigrationGuard.lua")
 local RuntimeDiagnostics = ModuleLoader.load("src/Runtime/RuntimeDiagnostics.lua")
 local StartupValidator = ModuleLoader.load("src/Runtime/StartupValidator.lua")
+local ReleaseMode = ModuleLoader.load("src/Runtime/ReleaseMode.lua")
+local LiveReadinessGate = ModuleLoader.load("src/Runtime/LiveReadinessGate.lua")
+local RuntimeSelfTest = ModuleLoader.load("src/Runtime/RuntimeSelfTest.lua")
 local runtime = RuntimeContext.build()
 
 local Logger = ModuleLoader.load("src/Core/Logger.lua")
@@ -68,7 +71,10 @@ MigrationGuard.init({ Logger = Logger, FeatureRegistry = FeatureRegistry,
     RuntimeDiagnostics = RuntimeDiagnostics,
     ModuleManifest = ModuleManifest,
     StartupValidator = StartupValidator,
-    ParityReportService = ParityReportService, MonolithBridge = MonolithBridge })
+    ParityReportService = ParityReportService,
+    ReleaseMode = ReleaseMode,
+    LiveReadinessGate = LiveReadinessGate,
+    RuntimeSelfTest = RuntimeSelfTest, MonolithBridge = MonolithBridge })
 HttpRequestService.init({ Logger = Logger, request = runtime.request, HttpService = runtime.HttpService })
 RemoteService.init({ Logger = Logger, ReplicatedStorage = runtime.ReplicatedStorage })
 ConfigService.init({ Logger = Logger, HttpService = runtime.HttpService })
@@ -116,6 +122,9 @@ local GAG2 = {
     ModuleManifest = ModuleManifest,
     StartupValidator = StartupValidator,
     ParityReportService = ParityReportService,
+    ReleaseMode = ReleaseMode,
+    LiveReadinessGate = LiveReadinessGate,
+    RuntimeSelfTest = RuntimeSelfTest,
     HttpRequestService = HttpRequestService,
     RemoteService = RemoteService,
     GardenService = GardenService,
@@ -141,11 +150,14 @@ local GAG2 = {
     ApsController = ApsController,
     ModularLive = true,
     FullyMigrated = false,
-    MigrationPercent = 80,
+    MigrationPercent = 90,
 }
 
 _G.GAG2 = GAG2
 StartupValidator.init({ Logger = Logger, ModuleManifest = ModuleManifest, ModuleLoader = ModuleLoader })
+ReleaseMode.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, MigrationGuard = MigrationGuard, mode = "hybrid" })
+LiveReadinessGate.init({ StartupValidator = StartupValidator, MigrationGuard = MigrationGuard, ParityReportService = ParityReportService, ReleaseMode = ReleaseMode })
+RuntimeSelfTest.init({ StartupValidator = StartupValidator, ParityReportService = ParityReportService, LiveReadinessGate = LiveReadinessGate })
 ParityReportService.init({ FeatureRegistry = FeatureRegistry, FeatureParityChecklist = FeatureParityChecklist, MigrationGuard = MigrationGuard })
 RuntimeDiagnostics.init({ Logger = Logger, GAG2 = GAG2 })
 
@@ -160,6 +172,7 @@ end
 
 Logger.info("Main", "Monolith fallback completed/started")
 return GAG2
+
 
 
 
