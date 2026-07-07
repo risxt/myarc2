@@ -2,7 +2,7 @@
 
 ## Current Honest Percentage
 
-40%
+45%
 
 ## Completed
 
@@ -33,4 +33,5 @@
 ## Definition of 100%
 
 `releases/main.lua` runs the whole hub using modules only, with no need to load `releases/gag2.live.lua`.
+
 

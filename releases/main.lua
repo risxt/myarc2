@@ -20,6 +20,8 @@ end
 
 local ModuleLoader = loadRemote("src/Runtime/ModuleLoader.lua")
 local RuntimeContext = ModuleLoader.load("src/Runtime/RuntimeContext.lua")
+local MonolithBridge = ModuleLoader.load("src/Runtime/MonolithBridge.lua")
+local MigrationGuard = ModuleLoader.load("src/Runtime/MigrationGuard.lua")
 local runtime = RuntimeContext.build()
 
 local Logger = ModuleLoader.load("src/Core/Logger.lua")
@@ -38,6 +40,10 @@ local ApsController = ModuleLoader.load("src/Controllers/ApsController.lua")
 
 
 FeatureRegistry.init({ Logger = Logger })
+MonolithBridge.init({ Logger = Logger, ModuleLoader = ModuleLoader, fallbackPath = "releases/gag2.live.lua", enabled = true })
+MigrationGuard.init({ Logger = Logger, FeatureRegistry = FeatureRegistry,
+    MonolithBridge = MonolithBridge,
+    MigrationGuard = MigrationGuard, MonolithBridge = MonolithBridge })
 HttpRequestService.init({ Logger = Logger, request = runtime.request, HttpService = runtime.HttpService })
 RemoteService.init({ Logger = Logger, ReplicatedStorage = runtime.ReplicatedStorage })
 ConfigService.init({ Logger = Logger, HttpService = runtime.HttpService })
@@ -64,6 +70,8 @@ local GAG2 = {
     ApsState = ApsState,
     ConfigService = ConfigService,
     FeatureRegistry = FeatureRegistry,
+    MonolithBridge = MonolithBridge,
+    MigrationGuard = MigrationGuard,
     HttpRequestService = HttpRequestService,
     RemoteService = RemoteService,
     GardenService = GardenService,
@@ -75,7 +83,7 @@ local GAG2 = {
     ApsController = ApsController,
     ModularLive = true,
     FullyMigrated = false,
-    MigrationPercent = 40,
+    MigrationPercent = 45,
 }
 
 _G.GAG2 = GAG2
@@ -83,8 +91,7 @@ _G.GAG2 = GAG2
 Logger.info("Main", "GAG2 modular runtime loaded")
 Logger.warn("Main", "Feature migration is not complete; loading monolith fallback for full hub behavior")
 
-local monolithFn = loadRemoteFunction("releases/gag2.live.lua")
-local ok, err = pcall(monolithFn)
+local ok, err = MonolithBridge.runFallback()
 if not ok then
     Logger.error("Main", "Monolith fallback failed", tostring(err))
     error(err)
@@ -92,6 +99,7 @@ end
 
 Logger.info("Main", "Monolith fallback completed/started")
 return GAG2
+
 
 
 
