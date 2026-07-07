@@ -1,6 +1,6 @@
 ﻿-- main.lua
--- Real modular entrypoint for GAG2.
--- Current status: loads modular runtime and exposes modules, but does not yet replace all monolith features.
+-- Hybrid live entrypoint for GAG2.
+-- Loads modular runtime first, then runs current full hub monolith as fallback until feature migration is complete.
 
 local BASE = "https://raw.githubusercontent.com/risxt/myarc2/main/"
 
@@ -11,9 +11,15 @@ local function loadRemote(path)
     return fn()
 end
 
+local function loadRemoteFunction(path)
+    local source = game:HttpGet(BASE .. path)
+    local fn, err = loadstring(source)
+    if not fn then error("Compile failed: " .. path .. " | " .. tostring(err)) end
+    return fn
+end
+
 local ModuleLoader = loadRemote("src/Runtime/ModuleLoader.lua")
 local RuntimeContext = ModuleLoader.load("src/Runtime/RuntimeContext.lua")
-
 local runtime = RuntimeContext.build()
 
 local Logger = ModuleLoader.load("src/Core/Logger.lua")
@@ -35,11 +41,20 @@ local GAG2 = {
     ApsController = ApsController,
     ModularLive = true,
     FullyMigrated = false,
+    MigrationPercent = 35,
 }
 
 _G.GAG2 = GAG2
 
 Logger.info("Main", "GAG2 modular runtime loaded")
-Logger.warn("Main", "Full feature migration is not complete yet; monolith fallback still required for full hub behavior")
+Logger.warn("Main", "Feature migration is not complete; loading monolith fallback for full hub behavior")
 
+local monolithFn = loadRemoteFunction("releases/gag2.live.lua")
+local ok, err = pcall(monolithFn)
+if not ok then
+    Logger.error("Main", "Monolith fallback failed", tostring(err))
+    error(err)
+end
+
+Logger.info("Main", "Monolith fallback completed/started")
 return GAG2
