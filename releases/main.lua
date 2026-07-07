@@ -103,10 +103,6 @@ PositionService.init({ Logger = Logger })
 SprinklerService.init({ Logger = Logger })
 PlantingService.init({ Logger = Logger })
 UIRegistry.init({ Logger = Logger })
-local maclib = nil
-pcall(function()
-    maclib = loadstring(game:HttpGet("https://raw.githubusercontent.com/mac2115/maclib/main/maclib.lua"))()
-end)
 
 local MonolithUI = ModuleLoader.load("src/UI/MonolithUI.lua")
 if MonolithUI then
