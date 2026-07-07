@@ -19,10 +19,12 @@ local function loadRemoteFunction(path)
 end
 
 local ModuleLoader = loadRemote("src/Runtime/ModuleLoader.lua")
+local ModuleManifest = ModuleLoader.load("src/Runtime/ModuleManifest.lua")
 local RuntimeContext = ModuleLoader.load("src/Runtime/RuntimeContext.lua")
 local MonolithBridge = ModuleLoader.load("src/Runtime/MonolithBridge.lua")
 local MigrationGuard = ModuleLoader.load("src/Runtime/MigrationGuard.lua")
 local RuntimeDiagnostics = ModuleLoader.load("src/Runtime/RuntimeDiagnostics.lua")
+local StartupValidator = ModuleLoader.load("src/Runtime/StartupValidator.lua")
 local runtime = RuntimeContext.build()
 
 local Logger = ModuleLoader.load("src/Core/Logger.lua")
@@ -32,6 +34,7 @@ local FeatureRegistry = ModuleLoader.load("src/Core/FeatureRegistry.lua")
 local FeatureParityChecklist = ModuleLoader.load("src/Core/FeatureParityChecklist.lua")
 local HttpRequestService = ModuleLoader.load("src/Services/HttpRequestService.lua")
 local RemoteService = ModuleLoader.load("src/Services/RemoteService.lua")
+local ParityReportService = ModuleLoader.load("src/Services/ParityReportService.lua")
 local GardenService = ModuleLoader.load("src/Services/GardenService.lua")
 local ApsSafetyService = ModuleLoader.load("src/Services/ApsSafetyService.lua")
 local WebhookService = ModuleLoader.load("src/Services/WebhookService.lua")
@@ -62,7 +65,10 @@ MigrationGuard.init({ Logger = Logger, FeatureRegistry = FeatureRegistry,
     FeatureParityChecklist = FeatureParityChecklist,
     MonolithBridge = MonolithBridge,
     MigrationGuard = MigrationGuard,
-    RuntimeDiagnostics = RuntimeDiagnostics, MonolithBridge = MonolithBridge })
+    RuntimeDiagnostics = RuntimeDiagnostics,
+    ModuleManifest = ModuleManifest,
+    StartupValidator = StartupValidator,
+    ParityReportService = ParityReportService, MonolithBridge = MonolithBridge })
 HttpRequestService.init({ Logger = Logger, request = runtime.request, HttpService = runtime.HttpService })
 RemoteService.init({ Logger = Logger, ReplicatedStorage = runtime.ReplicatedStorage })
 ConfigService.init({ Logger = Logger, HttpService = runtime.HttpService })
@@ -107,6 +113,9 @@ local GAG2 = {
     MonolithBridge = MonolithBridge,
     MigrationGuard = MigrationGuard,
     RuntimeDiagnostics = RuntimeDiagnostics,
+    ModuleManifest = ModuleManifest,
+    StartupValidator = StartupValidator,
+    ParityReportService = ParityReportService,
     HttpRequestService = HttpRequestService,
     RemoteService = RemoteService,
     GardenService = GardenService,
@@ -132,10 +141,12 @@ local GAG2 = {
     ApsController = ApsController,
     ModularLive = true,
     FullyMigrated = false,
-    MigrationPercent = 70,
+    MigrationPercent = 80,
 }
 
 _G.GAG2 = GAG2
+StartupValidator.init({ Logger = Logger, ModuleManifest = ModuleManifest, ModuleLoader = ModuleLoader })
+ParityReportService.init({ FeatureRegistry = FeatureRegistry, FeatureParityChecklist = FeatureParityChecklist, MigrationGuard = MigrationGuard })
 RuntimeDiagnostics.init({ Logger = Logger, GAG2 = GAG2 })
 
 Logger.info("Main", "GAG2 modular runtime loaded")
@@ -149,6 +160,7 @@ end
 
 Logger.info("Main", "Monolith fallback completed/started")
 return GAG2
+
 
 
 
