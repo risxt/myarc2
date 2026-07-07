@@ -103,6 +103,25 @@ PositionService.init({ Logger = Logger })
 SprinklerService.init({ Logger = Logger })
 PlantingService.init({ Logger = Logger })
 UIRegistry.init({ Logger = Logger })
+local maclib = nil
+pcall(function()
+    maclib = loadstring(game:HttpGet("https://raw.githubusercontent.com/mac2115/maclib/main/maclib.lua"))()
+end)
+local Window = nil
+if maclib then
+    Window = maclib:Window({
+        Title = "Grow A Garden",
+        Subtitle = "GAG2 Modular",
+        Size = UDim2.fromOffset(868, 650),
+        DragMode = 2,
+        Color = Color3.fromRGB(255, 120, 0),
+        Icon = "rbxassetid://16447831612"
+    })
+end
+local MonolithUI = ModuleLoader.load("src/UI/MonolithUI.lua")
+if MonolithUI then
+    MonolithUI.init({ Window = Window, Cfg = ConfigService.getCfg(), UIRegistry = UIRegistry, ToggleBinder = ToggleBinder, maclib = maclib })
+end
 ToggleBinder.init({ Logger = Logger, ConfigService = ConfigService })
 AutoCollectController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, Cfg = ConfigService.getCfg(), LocalPlayer = runtime.LocalPlayer, Networking = Networking, Workspace = workspace })
 AutoSellController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, Cfg = ConfigService.getCfg(), Networking = Networking, LocalPlayer = runtime.LocalPlayer, calcFruitValue = FruitValueCalc, SEED_RARITY = SEED_RARITY })
@@ -181,14 +200,26 @@ RuntimeDiagnostics.init({ Logger = Logger, GAG2 = GAG2 })
 Logger.info("Main", "GAG2 modular runtime loaded")
 Logger.info("Main", "All features modular-owned. Monolith fallback still loaded for runtime safety until live-tested.")
 
-local ok, err = MonolithBridge.runFallback()
-if not ok then
-    Logger.error("Main", "Monolith fallback failed", tostring(err))
-    error(err)
-end
+Logger.info("Main", "Starting all controllers...")
+AutoCollectController.start()
+AutoSellController.start()
+ShopController.start()
+MailController.start()
+PetsController.start()
+ToolAutomationController.start()
+WeatherController.start()
+OverlayController.start()
+StackFarmController.start()
+StealController.start()
+LocalPlayerController.start()
+MiscController.start()
+ApsController.start()
+PlantingService.start()
 
-Logger.info("Main", "Monolith fallback completed/started")
+
 return GAG2
+
+
 
 
 
