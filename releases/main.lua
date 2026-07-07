@@ -25,6 +25,9 @@ local runtime = RuntimeContext.build()
 local Logger = ModuleLoader.load("src/Core/Logger.lua")
 local ApsState = ModuleLoader.load("src/Core/ApsState.lua")
 local ConfigService = ModuleLoader.load("src/Core/ConfigService.lua")
+local FeatureRegistry = ModuleLoader.load("src/Core/FeatureRegistry.lua")
+local HttpRequestService = ModuleLoader.load("src/Services/HttpRequestService.lua")
+local RemoteService = ModuleLoader.load("src/Services/RemoteService.lua")
 local GardenService = ModuleLoader.load("src/Services/GardenService.lua")
 local ApsSafetyService = ModuleLoader.load("src/Services/ApsSafetyService.lua")
 local WebhookService = ModuleLoader.load("src/Services/WebhookService.lua")
@@ -38,6 +41,9 @@ local GAG2 = {
     Logger = Logger,
     ApsState = ApsState,
     ConfigService = ConfigService,
+    FeatureRegistry = FeatureRegistry,
+    HttpRequestService = HttpRequestService,
+    RemoteService = RemoteService,
     GardenService = GardenService,
     ApsSafetyService = ApsSafetyService,
     WebhookService = WebhookService,
@@ -47,7 +53,7 @@ local GAG2 = {
     ApsController = ApsController,
     ModularLive = true,
     FullyMigrated = false,
-    MigrationPercent = 35,
+    MigrationPercent = 40,
 }
 
 _G.GAG2 = GAG2
@@ -64,4 +70,5 @@ end
 
 Logger.info("Main", "Monolith fallback completed/started")
 return GAG2
+
 
