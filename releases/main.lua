@@ -36,6 +36,11 @@ local WebhookService = ModuleLoader.load("src/Services/WebhookService.lua")
 local PositionService = ModuleLoader.load("src/Services/PositionService.lua")
 local SprinklerService = ModuleLoader.load("src/Services/SprinklerService.lua")
 local PlantingService = ModuleLoader.load("src/Services/PlantingService.lua")
+local UIRegistry = ModuleLoader.load("src/UI/UIRegistry.lua")
+local ToggleBinder = ModuleLoader.load("src/UI/ToggleBinder.lua")
+local AutoCollectController = ModuleLoader.load("src/Controllers/AutoCollectController.lua")
+local AutoSellController = ModuleLoader.load("src/Controllers/AutoSellController.lua")
+local ShopController = ModuleLoader.load("src/Controllers/ShopController.lua")
 local ApsController = ModuleLoader.load("src/Controllers/ApsController.lua")
 
 
@@ -53,6 +58,11 @@ WebhookService.init({ Logger = Logger, Player = runtime.Player, HttpService = ru
 PositionService.init({ Logger = Logger })
 SprinklerService.init({ Logger = Logger })
 PlantingService.init({ Logger = Logger })
+UIRegistry.init({ Logger = Logger })
+ToggleBinder.init({ Logger = Logger, ConfigService = ConfigService })
+AutoCollectController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
+AutoSellController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
+ShopController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
 ApsController.init({
     Logger = Logger,
     ConfigService = ConfigService,
@@ -80,10 +90,15 @@ local GAG2 = {
     PositionService = PositionService,
     SprinklerService = SprinklerService,
     PlantingService = PlantingService,
+    UIRegistry = UIRegistry,
+    ToggleBinder = ToggleBinder,
+    AutoCollectController = AutoCollectController,
+    AutoSellController = AutoSellController,
+    ShopController = ShopController,
     ApsController = ApsController,
     ModularLive = true,
     FullyMigrated = false,
-    MigrationPercent = 45,
+    MigrationPercent = 50,
 }
 
 _G.GAG2 = GAG2
@@ -99,6 +114,7 @@ end
 
 Logger.info("Main", "Monolith fallback completed/started")
 return GAG2
+
 
 
 
