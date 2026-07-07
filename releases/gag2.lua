@@ -7483,27 +7483,27 @@ do
         end
     end
 
-    local _totalLbl = nil
-    local function updateTotal(anchor)
+    _G.__GAG2_totalLbl = _G.__GAG2_totalLbl
+    _G.__GAG2_updateTotal = function(anchor)
         local count, total = calcTotalValue()
-        if not _totalLbl or not _totalLbl.Parent then
-            _totalLbl = Instance.new("TextLabel")
-            _totalLbl.Name = TOTAL_TAG
-            _totalLbl.Size = UDim2.new(0, 300, 0, 24)
-            _totalLbl.AnchorPoint = Vector2.new(0, 0.5)
-            _totalLbl.Position = UDim2.new(0, 210, 0, 22)
-            _totalLbl.BackgroundColor3 = Color3.new(0, 0, 0)
-            _totalLbl.BackgroundTransparency = 1
-            _totalLbl.TextColor3 = Color3.fromRGB(80, 255, 120)
-            _totalLbl.TextScaled = false
-            _totalLbl.TextSize = 20
-            _totalLbl.TextXAlignment = Enum.TextXAlignment.Left
-            _totalLbl.Font = Enum.Font.GothamBold
-            _totalLbl.ZIndex = 20
-            _totalLbl.Parent = anchor
-            Instance.new("UICorner", _totalLbl).CornerRadius = UDim.new(0, 4)
+        if not _G.__GAG2_totalLbl or not _G.__GAG2_totalLbl.Parent then
+            _G.__GAG2_totalLbl = Instance.new("TextLabel")
+            _G.__GAG2_totalLbl.Name = TOTAL_TAG
+            _G.__GAG2_totalLbl.Size = UDim2.new(0, 300, 0, 24)
+            _G.__GAG2_totalLbl.AnchorPoint = Vector2.new(0, 0.5)
+            _G.__GAG2_totalLbl.Position = UDim2.new(0, 210, 0, 22)
+            _G.__GAG2_totalLbl.BackgroundColor3 = Color3.new(0, 0, 0)
+            _G.__GAG2_totalLbl.BackgroundTransparency = 1
+            _G.__GAG2_totalLbl.TextColor3 = Color3.fromRGB(80, 255, 120)
+            _G.__GAG2_totalLbl.TextScaled = false
+            _G.__GAG2_totalLbl.TextSize = 20
+            _G.__GAG2_totalLbl.TextXAlignment = Enum.TextXAlignment.Left
+            _G.__GAG2_totalLbl.Font = Enum.Font.GothamBold
+            _G.__GAG2_totalLbl.ZIndex = 20
+            _G.__GAG2_totalLbl.Parent = anchor
+            Instance.new("UICorner", _G.__GAG2_totalLbl).CornerRadius = UDim.new(0, 4)
         end
-        _totalLbl.Text = count .. " Fruits | " .. fmtValue(total)
+        _G.__GAG2_totalLbl.Text = count .. " Fruits | " .. fmtValue(total)
     end
 
     task.spawn(function()
@@ -7524,12 +7524,12 @@ do
             task.wait(0.1)
             refreshAllSlots(ugf)
             if hotbarSlotContainer then refreshAllSlots(hotbarSlotContainer) end
-            updateTotal(inventoryFrame)
+            _G.__GAG2_updateTotal(inventoryFrame)
         end
 
         refreshAllSlots(ugf)
         if hotbarSlotContainer then refreshAllSlots(hotbarSlotContainer) end
-        updateTotal(inventoryFrame)
+        _G.__GAG2_updateTotal(inventoryFrame)
 
         ugf.ChildAdded:Connect(function(slot) task.wait(0.05); injectSlot(slot) end)
 
