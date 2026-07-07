@@ -107,20 +107,10 @@ local maclib = nil
 pcall(function()
     maclib = loadstring(game:HttpGet("https://raw.githubusercontent.com/mac2115/maclib/main/maclib.lua"))()
 end)
-local Window = nil
-if maclib then
-    Window = maclib:Window({
-        Title = "Grow A Garden",
-        Subtitle = "GAG2 Modular",
-        Size = UDim2.fromOffset(868, 650),
-        DragMode = 2,
-        Color = Color3.fromRGB(255, 120, 0),
-        Icon = "rbxassetid://16447831612"
-    })
-end
+
 local MonolithUI = ModuleLoader.load("src/UI/MonolithUI.lua")
 if MonolithUI then
-    MonolithUI.init({ Window = Window, Cfg = ConfigService.getCfg(), UIRegistry = UIRegistry, ToggleBinder = ToggleBinder, maclib = maclib })
+    MonolithUI.init({ Cfg = ConfigService.getCfg(), UIRegistry = UIRegistry, ToggleBinder = ToggleBinder })
 end
 ToggleBinder.init({ Logger = Logger, ConfigService = ConfigService })
 AutoCollectController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, Cfg = ConfigService.getCfg(), LocalPlayer = runtime.LocalPlayer, Networking = Networking, Workspace = workspace })
