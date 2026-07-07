@@ -121,7 +121,10 @@ StackFarmController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, C
 StealController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, Cfg = ConfigService.getCfg(), Networking = Networking, LocalPlayer = runtime.LocalPlayer, Players = runtime.Players, ReplicatedStorage = runtime.ReplicatedStorage, SEED_RARITY = SEED_RARITY, RARITY_RANK = RARITY_RANK })
 LocalPlayerController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, LocalPlayer = runtime.LocalPlayer })
 MiscController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, Cfg = ConfigService.getCfg() })
-ApsController.init({`r`n    Logger = Logger,`r`n    Cfg = ConfigService.getCfg(),`r`n    FeatureRegistry = FeatureRegistry,
+ApsController.init({
+    Logger = Logger,
+    Cfg = ConfigService.getCfg(),
+    FeatureRegistry = FeatureRegistry,
     ConfigService = ConfigService,
     ApsState = ApsState,
     GardenService = GardenService,

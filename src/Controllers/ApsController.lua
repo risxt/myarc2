@@ -43,7 +43,11 @@ function ApsController.init(deps)
     ApsController.SprinklerService = deps.SprinklerService
     ApsController.PositionService = deps.PositionService
     ApsController.setStatus = deps.setStatus
-    if deps.FeatureRegistry then deps.FeatureRegistry.set("APS", "modular") end`r`n    return ApsController`r`nend`r`n`r`nfunction ApsController.status(message)
+    if deps.FeatureRegistry then deps.FeatureRegistry.set("APS", "modular") end
+    return ApsController
+end
+
+function ApsController.status(message)
     if type(ApsController.setStatus) == "function" then
         ApsController.setStatus(message)
     end
