@@ -4,7 +4,7 @@
 |---|---:|---|
 | ApsController.lua | no | PORTING/DRAFT |
 | AutoCollectController.lua | yes | BLOCKED |
-| AutoSellController.lua | yes | BLOCKED |
+| AutoSellController.lua | no | PORTING/DRAFT |
 | LocalPlayerController.lua | no | PORTING/DRAFT |
 | MailController.lua | yes | BLOCKED |
 | MiscController.lua | yes | BLOCKED |
@@ -17,7 +17,7 @@
 | WeatherController.lua | yes | BLOCKED |
 
 ## Blocker Count
-11
+10
 
 ## Result
 NOT 100%
