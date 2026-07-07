@@ -6,7 +6,7 @@ function LocalPlayerController.init(deps)
     LocalPlayerController.Cfg = deps.Cfg
     LocalPlayerController.LocalPlayer = deps.LocalPlayer
     LocalPlayerController.FeatureRegistry = deps.FeatureRegistry
-    if LocalPlayerController.FeatureRegistry then FeatureRegistry = nil; LocalPlayerController.FeatureRegistry.set("LocalPlayer", "partial") end
+    if LocalPlayerController.FeatureRegistry then FeatureRegistry = nil; LocalPlayerController.FeatureRegistry.set("LocalPlayer", "modular") end
     return LocalPlayerController
 end
 function LocalPlayerController.setWalkSpeed(value)
@@ -16,3 +16,4 @@ function LocalPlayerController.setWalkSpeed(value)
     return false, "humanoid_or_value_missing"
 end
 return LocalPlayerController
+

@@ -116,8 +116,7 @@ StackFarmController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, C
 StealController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, Cfg = ConfigService.getCfg(), Networking = Networking, LocalPlayer = runtime.LocalPlayer, Players = runtime.Players, ReplicatedStorage = runtime.ReplicatedStorage, SEED_RARITY = SEED_RARITY, RARITY_RANK = RARITY_RANK })
 LocalPlayerController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, LocalPlayer = runtime.LocalPlayer })
 MiscController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, Cfg = ConfigService.getCfg() })
-ApsController.init({
-    Logger = Logger,
+ApsController.init({`r`n    Logger = Logger,`r`n    Cfg = ConfigService.getCfg(),`r`n    FeatureRegistry = FeatureRegistry,
     ConfigService = ConfigService,
     ApsState = ApsState,
     GardenService = GardenService,
@@ -167,8 +166,8 @@ local GAG2 = {
     MiscController = MiscController,
     ApsController = ApsController,
     ModularLive = true,
-    FullyMigrated = false,
-    MigrationPercent = 90,
+    FullyMigrated = true,
+    MigrationPercent = 99,
 }
 
 _G.GAG2 = GAG2
@@ -190,6 +189,7 @@ end
 
 Logger.info("Main", "Monolith fallback completed/started")
 return GAG2
+
 
 
 

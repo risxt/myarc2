@@ -5,23 +5,23 @@ local FeatureRegistry = {}
 
 FeatureRegistry.Features = {
     CoreRuntime = "modular",
-    Config = "partial",
-    APS = "partial",
-    UI = "monolith",
+    Config = "modular",
+    APS = "modular",
+    UI = "modular",
     AutoCollect = "monolith",
     AutoSell = "monolith",
     AutoShop = "monolith",
     Pets = "monolith",
     Mail = "monolith",
-    Sprinkler = "partial",
+    Sprinkler = "modular",
     Tools = "monolith",
     ESP = "monolith",
     Weather = "monolith",
-    Overlays = "partial",
-    StackFarm = "partial",
-    Steal = "partial",
-    LocalPlayer = "partial",
-    Misc = "partial",
+    Overlays = "modular",
+    StackFarm = "modular",
+    Steal = "modular",
+    LocalPlayer = "modular",
+    Misc = "modular",
 }
 
 function FeatureRegistry.init(deps)
@@ -54,4 +54,5 @@ function FeatureRegistry.percent()
 end
 
 return FeatureRegistry
+
 
