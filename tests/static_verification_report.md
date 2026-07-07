@@ -49,6 +49,20 @@
 - apsResume=false refs: 0
 - returns module: true
 
+## src/Runtime/ModuleLoader.lua
+- teleport refs: 0
+- reverse const: false
+- apsResume=true refs: 0
+- apsResume=false refs: 0
+- returns module: true
+
+## src/Runtime/RuntimeContext.lua
+- teleport refs: 0
+- reverse const: false
+- apsResume=true refs: 0
+- apsResume=false refs: 0
+- returns module: true
+
 ## src/Services/ApsSafetyService.lua
 - teleport refs: 2
 - reverse const: true
