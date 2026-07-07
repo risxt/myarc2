@@ -1,7 +1,7 @@
 -- GAG2 Safe Modular Loader
--- Fetches releases/main.lua from GitHub with explicit compile/runtime diagnostics.
+-- Normal one-line entrypoint loader for releases/main.lua.
 
-local URL = "https://raw.githubusercontent.com/risxt/myarc2/main/releases/main.lua?v=" .. tostring(os.time())
+local URL = "https://raw.githubusercontent.com/risxt/myarc2/main/releases/main.lua"
 
 local ok, source = pcall(function()
     return game:HttpGet(URL)

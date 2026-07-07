@@ -7,7 +7,7 @@ Private modular automation suite for Grow a Garden (Roblox).
 Use the safe modular loader:
 
 ```lua
-loadstring(game:HttpGet("https://raw.githubusercontent.com/risxt/myarc2/main/releases/loader.lua?v=" .. tostring(os.time())))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/risxt/myarc2/main/releases/loader.lua"))()
 ```
 
 ## Repository Structure
