@@ -30,6 +30,24 @@ local LiveReadinessGate = ModuleLoader.load("src/Runtime/LiveReadinessGate.lua")
 local RuntimeSelfTest = ModuleLoader.load("src/Runtime/RuntimeSelfTest.lua")
 local runtime = RuntimeContext.build()
 
+local Networking = nil
+pcall(function()
+    Networking = require(runtime.ReplicatedStorage:WaitForChild("SharedModules"):WaitForChild("Networking"))
+end)
+local SeedDataMod = nil
+local SEED_RARITY = {}
+pcall(function()
+    SeedDataMod = require(runtime.ReplicatedStorage:WaitForChild("SharedModules"):WaitForChild("SeedData"))
+    for _, d in pairs(SeedDataMod or {}) do
+        if d.SeedName and d.Rarity then SEED_RARITY[d.SeedName] = d.Rarity end
+    end
+end)
+local RARITY_RANK = { Common=1, Uncommon=2, Rare=3, Epic=4, Legendary=5, Mythic=6, Super=7, Divine=8, Prismatic=9 }
+local FruitValueCalc = nil
+pcall(function()
+    FruitValueCalc = require(runtime.ReplicatedStorage:WaitForChild("SharedModules"):WaitForChild("FruitValueCalc"))
+end)
+
 local Logger = ModuleLoader.load("src/Core/Logger.lua")
 local ApsState = ModuleLoader.load("src/Core/ApsState.lua")
 local ConfigService = ModuleLoader.load("src/Core/ConfigService.lua")
@@ -77,7 +95,7 @@ MigrationGuard.init({ Logger = Logger, FeatureRegistry = FeatureRegistry,
     RuntimeSelfTest = RuntimeSelfTest, MonolithBridge = MonolithBridge })
 HttpRequestService.init({ Logger = Logger, request = runtime.request, HttpService = runtime.HttpService })
 RemoteService.init({ Logger = Logger, ReplicatedStorage = runtime.ReplicatedStorage })
-ConfigService.init({ Logger = Logger, HttpService = runtime.HttpService })
+ConfigService.init({ Logger = Logger, HttpService = runtime.HttpService, Cfg = (_G.Cfg or {}) })
 GardenService.init({ Logger = Logger, LocalPlayer = runtime.LocalPlayer, workspace = workspace })
 ApsSafetyService.init({ Logger = Logger, ApsState = ApsState, TeleportService = runtime.TeleportService, LocalPlayer = runtime.LocalPlayer, ReplicatedStorage = runtime.ReplicatedStorage })
 WebhookService.init({ Logger = Logger, Player = runtime.Player, HttpService = runtime.HttpService, request = runtime.request })
@@ -86,18 +104,18 @@ SprinklerService.init({ Logger = Logger })
 PlantingService.init({ Logger = Logger })
 UIRegistry.init({ Logger = Logger })
 ToggleBinder.init({ Logger = Logger, ConfigService = ConfigService })
-AutoCollectController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, LocalPlayer = runtime.LocalPlayer, Networking = nil, Workspace = workspace })
-AutoSellController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, LocalPlayer = runtime.LocalPlayer })
-ShopController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, ReplicatedStorage = runtime.ReplicatedStorage })
-MailController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, LocalPlayer = runtime.LocalPlayer })
-PetsController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, LocalPlayer = runtime.LocalPlayer, Workspace = workspace })
-ToolAutomationController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, LocalPlayer = runtime.LocalPlayer })
-WeatherController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, LocalPlayer = runtime.LocalPlayer, TeleportService = runtime.TeleportService, Workspace = workspace })
+AutoCollectController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, Cfg = ConfigService.getCfg(), LocalPlayer = runtime.LocalPlayer, Networking = Networking, Workspace = workspace })
+AutoSellController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, Cfg = ConfigService.getCfg(), Networking = Networking, LocalPlayer = runtime.LocalPlayer, calcFruitValue = FruitValueCalc, SEED_RARITY = SEED_RARITY })
+ShopController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, Cfg = ConfigService.getCfg(), Networking = Networking, ReplicatedStorage = runtime.ReplicatedStorage })
+MailController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, Cfg = ConfigService.getCfg(), Networking = Networking, LocalPlayer = runtime.LocalPlayer, calcFruitValue = FruitValueCalc })
+PetsController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, Cfg = ConfigService.getCfg(), Networking = Networking, LocalPlayer = runtime.LocalPlayer, Workspace = workspace })
+ToolAutomationController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, Cfg = ConfigService.getCfg(), LocalPlayer = runtime.LocalPlayer })
+WeatherController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, Cfg = ConfigService.getCfg(), LocalPlayer = runtime.LocalPlayer, TeleportService = runtime.TeleportService, Workspace = workspace })
 OverlayController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, LocalPlayer = runtime.LocalPlayer })
-StackFarmController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
-StealController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, LocalPlayer = runtime.LocalPlayer, Players = runtime.Players, ReplicatedStorage = runtime.ReplicatedStorage })
+StackFarmController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, Cfg = ConfigService.getCfg() })
+StealController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, Cfg = ConfigService.getCfg(), Networking = Networking, LocalPlayer = runtime.LocalPlayer, Players = runtime.Players, ReplicatedStorage = runtime.ReplicatedStorage, SEED_RARITY = SEED_RARITY, RARITY_RANK = RARITY_RANK })
 LocalPlayerController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, LocalPlayer = runtime.LocalPlayer })
-MiscController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
+MiscController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, Cfg = ConfigService.getCfg() })
 ApsController.init({
     Logger = Logger,
     ConfigService = ConfigService,
@@ -172,6 +190,7 @@ end
 
 Logger.info("Main", "Monolith fallback completed/started")
 return GAG2
+
 
 
 
