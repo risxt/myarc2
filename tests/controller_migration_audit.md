@@ -9,15 +9,15 @@
 | MailController.lua | yes | BLOCKED |
 | MiscController.lua | yes | BLOCKED |
 | OverlayController.lua | yes | BLOCKED |
-| PetsController.lua | yes | BLOCKED |
+| PetsController.lua | no | PORTING/DRAFT |
 | ShopController.lua | no | PORTING/DRAFT |
 | StackFarmController.lua | yes | BLOCKED |
-| StealController.lua | yes | BLOCKED |
+| StealController.lua | no | PORTING/DRAFT |
 | ToolAutomationController.lua | yes | BLOCKED |
 | WeatherController.lua | yes | BLOCKED |
 
 ## Blocker Count
-9
+7
 
 ## Result
 NOT 100%
