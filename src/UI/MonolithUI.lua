@@ -1,19 +1,262 @@
 -- MonolithUI.lua
--- Extracted UI library (Speed_Library) and definitions from gag2.lua for GAG2 modular injection.
+-- Extracted UI library + legacy UI from gag2.lua for modular runtime.
 local MonolithUI = {}
 
 function MonolithUI.init(deps)
-    local Cfg = deps.Cfg
+    local Cfg = deps.Cfg or _G.Cfg or {}
     local UIRegistry = deps.UIRegistry
     local ToggleBinder = deps.ToggleBinder
-    
-    local _G = getfenv(0)
+
+    local Players = game:GetService("Players")
+    local Player = Players.LocalPlayer
+    local LocalPlayer = Player
+    local RunService = game:GetService("RunService")
+    local TweenService = game:GetService("TweenService")
+    local UserInputService = game:GetService("UserInputService")
+    local VirtualUser = game:GetService("VirtualUser")
+    local VirtualInputManager = game:GetService("VirtualInputManager")
+    local TeleportService = game:GetService("TeleportService")
+    local CoreGui = game:GetService("CoreGui")
+    local HttpService = game:GetService("HttpService")
+    local ReplicatedStorage = game:GetService("ReplicatedStorage")
+    local Workspace = workspace
+
     _G.Cfg = Cfg
-    _G.Menu = {
-        ['Main'] = {
-            ['Auto Hatch'] = false
-        }
-    } -- placeholder to prevent legacy errors
+    _G.Menu = _G.Menu or { ['Main'] = { ['Auto Hatch'] = false } }
+
+local Custom = {} do
+  Custom.ColorRGB = Color3.fromRGB(0, 160, 255)
+
+  function Custom:Create(Name, Properties, Parent)
+    local _instance = Instance.new(Name)
+
+    for i, v in pairs(Properties) do
+      _instance[i] = v
+    end
+
+    if Parent then
+      _instance.Parent = Parent
+    end
+
+    return _instance
+  end
+
+  function Custom:EnabledAFK()
+    if _G._GAG_AntiAFK_Enabled then return end
+    _G._GAG_AntiAFK_Enabled = true
+
+    local lastActivity = os.clock()
+    local function markActivity()
+      lastActivity = os.clock()
+    end
+
+    UserInputService.InputBegan:Connect(markActivity)
+    UserInputService.InputChanged:Connect(markActivity)
+
+    local function pulseInput()
+      pcall(function()
+        VirtualUser:CaptureController()
+        VirtualUser:ClickButton2(Vector2.new(0, 0))
+        VirtualUser:Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+        task.wait(0.05)
+        VirtualUser:Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+      end)
+
+      pcall(function()
+        local cam = workspace.CurrentCamera
+        local viewport = cam and cam.ViewportSize or Vector2.new(800, 600)
+        local x, y = math.floor(viewport.X * 0.5), math.floor(viewport.Y * 0.5)
+        VirtualInputManager:SendMouseMoveEvent(x, y, game)
+        VirtualInputManager:SendMouseButtonEvent(x, y, 1, true, game, 0)
+        task.wait(0.03)
+        VirtualInputManager:SendMouseButtonEvent(x, y, 1, false, game, 0)
+        VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.LeftShift, false, game)
+        task.wait(0.03)
+        VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.LeftShift, false, game)
+      end)
+    end
+
+    local function nudgeCharacter()
+      pcall(function()
+        local char = Player.Character
+        local hum = char and char:FindFirstChildOfClass("Humanoid")
+        if hum and hum.Health > 0 and hum.MoveDirection.Magnitude < 0.05 then
+          hum.Jump = true
+          hum:Move(Vector3.new(0.015, 0, 0), false)
+          task.wait(0.08)
+          hum:Move(Vector3.zero, false)
+        end
+      end)
+    end
+
+    Player.Idled:Connect(function()
+      pulseInput()
+      nudgeCharacter()
+      markActivity()
+    end)
+
+    task.spawn(function()
+      while not Speed_Library or not Speed_Library.Unloaded do
+        task.wait(35)
+        if os.clock() - lastActivity >= 30 then
+          pulseInput()
+          nudgeCharacter()
+          markActivity()
+        end
+      end
+    end)
+
+    CoreGui.ChildAdded:Connect(function(child)
+      if child.Name == "RobloxPromptGui" then
+        task.wait(3)
+        pcall(function()
+          TeleportService:Teleport(game.PlaceId, Player)
+        end)
+      end
+    end)
+  end
+end
+
+Custom:EnabledAFK()
+
+local function OpenClose()
+  local ScreenGui = Custom:Create("ScreenGui", {
+    ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+  }, RunService:IsStudio() and Player.PlayerGui or (gethui() or cloneref(game:GetService("CoreGui")) or game:GetService("CoreGui")))
+
+  local Close_ImageButton = Custom:Create("ImageButton", {
+    BackgroundColor3 = Color3.fromRGB(0, 0, 0),
+    BorderColor3 = Color3.fromRGB(255, 0, 0),
+    BackgroundTransparency = 1,
+    Position = UDim2.new(0.1021, 0, 0.0743, 0),
+    Size = UDim2.new(0, 59, 0, 49),
+    Image = "rbxassetid://136890595976124",
+    Visible = false,
+  }, ScreenGui)
+
+  local UICorner = Custom:Create("UICorner", {
+    Name = "MainCorner",
+    CornerRadius = UDim.new(0, 9),
+  }, Close_ImageButton)
+
+  local dragging, dragStart, startPos = false, nil, nil
+
+  local function UpdateDraggable(input)
+    local delta = input.Position - dragStart
+    Close_ImageButton.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+  end
+
+  Close_ImageButton.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
+      dragging = true
+      dragStart = input.Position
+      startPos = Close_ImageButton.Position
+
+      input.Changed:Connect(function()
+        if input.UserInputState == Enum.UserInputState.End then
+          dragging = false
+        end
+      end)
+    end
+  end)
+
+  Close_ImageButton.InputChanged:Connect(function(input)
+    if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+      UpdateDraggable(input)
+    end
+  end)
+
+  return Close_ImageButton
+end
+
+local Open_Close = OpenClose()
+
+local function MakeDraggable(topbarobject, object)
+  local dragging = false
+  local dragStart, startPos, targetPos = nil, nil, nil
+  local renderConn, endConn = nil, nil
+
+  local function stopDrag()
+    dragging = false
+    if renderConn then renderConn:Disconnect(); renderConn = nil end
+    if endConn then endConn:Disconnect(); endConn = nil end
+  end
+
+  local function UpdateTarget(input)
+    if not dragging or not dragStart or not startPos then return end
+    local delta = input.Position - dragStart
+    targetPos = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+  end
+
+  topbarobject.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+      dragging = true
+      dragStart = input.Position
+      startPos = object.Position
+      targetPos = startPos
+
+      if renderConn then renderConn:Disconnect() end
+      renderConn = RunService.RenderStepped:Connect(function()
+        if dragging and targetPos then
+          object.Position = targetPos
+        end
+      end)
+
+      if endConn then endConn:Disconnect() end
+      endConn = input.Changed:Connect(function()
+        if input.UserInputState == Enum.UserInputState.End then
+          stopDrag()
+        end
+      end)
+    end
+  end)
+
+  UserInputService.InputChanged:Connect(function(input)
+    if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+      UpdateTarget(input)
+    end
+  end)
+end
+
+function CircleClick(Button, X, Y)
+	task.spawn(function()
+		Button.ClipsDescendants = true
+		
+		local Circle = Instance.new("ImageLabel")
+		Circle.Image = "rbxassetid://106471194043211"
+		Circle.ImageColor3 = Color3.fromRGB(80, 80, 80)
+		Circle.ImageTransparency = 0.8999999761581421
+		Circle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		Circle.BackgroundTransparency = 1
+		Circle.ZIndex = 10
+		Circle.Name = "Circle"
+		Circle.Parent = Button
+		
+		local NewX = X - Button.AbsolutePosition.X
+		local NewY = Y - Button.AbsolutePosition.Y
+		Circle.Position = UDim2.new(0, NewX, 0, NewY)
+
+		local Size = math.max(Button.AbsoluteSize.X, Button.AbsoluteSize.Y) * 1.5
+
+		local Time = 0.5
+		local TweenInfo = TweenInfo.new(Time, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+
+		local Tween = TweenService:Create(Circle, TweenInfo, {
+			Size = UDim2.new(0, Size, 0, Size),
+			Position = UDim2.new(0.5, -Size/2, 0.5, -Size/2)
+		})
+		
+		Tween:Play()
+		
+		Tween.Completed:Connect(function()
+			for i = 1, 10 do
+				Circle.ImageTransparency = Circle.ImageTransparency + 0.01
+				wait(Time / 10)
+			end
+			Circle:Destroy()
+		end)
+	end)
+end
 
 local Speed_Library, Notification = {}, {}
 
@@ -2102,6 +2345,7 @@ function Speed_Library:CreateWindow(Config)
   return Tabs
 end
 
+
 -- ==================== UI ====================
 
 local _icons = {"rbxassetid://10734942198","rbxassetid://10723407389","rbxassetid://10734923549","rbxassetid://10709769841","rbxassetid://10734952273","rbxassetid://11447063791","rbxassetid://10734950309","rbxassetid://8997386997"}
@@ -3421,7 +3665,8 @@ local dynamicThread = coroutine.wrap(function()
 end)
 dynamicThread()
 
-
+    print("[MonolithUI] UI initialized")
     return true
 end
+
 return MonolithUI
