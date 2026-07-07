@@ -36,6 +36,28 @@ local SprinklerService = ModuleLoader.load("src/Services/SprinklerService.lua")
 local PlantingService = ModuleLoader.load("src/Services/PlantingService.lua")
 local ApsController = ModuleLoader.load("src/Controllers/ApsController.lua")
 
+
+FeatureRegistry.init({ Logger = Logger })
+HttpRequestService.init({ Logger = Logger, request = runtime.request, HttpService = runtime.HttpService })
+RemoteService.init({ Logger = Logger, ReplicatedStorage = runtime.ReplicatedStorage })
+ConfigService.init({ Logger = Logger, HttpService = runtime.HttpService })
+GardenService.init({ Logger = Logger, LocalPlayer = runtime.LocalPlayer, workspace = workspace })
+ApsSafetyService.init({ Logger = Logger, ApsState = ApsState, TeleportService = runtime.TeleportService, LocalPlayer = runtime.LocalPlayer, ReplicatedStorage = runtime.ReplicatedStorage })
+WebhookService.init({ Logger = Logger, Player = runtime.Player, HttpService = runtime.HttpService, request = runtime.request })
+PositionService.init({ Logger = Logger })
+SprinklerService.init({ Logger = Logger })
+PlantingService.init({ Logger = Logger })
+ApsController.init({
+    Logger = Logger,
+    ConfigService = ConfigService,
+    ApsState = ApsState,
+    GardenService = GardenService,
+    ApsSafetyService = ApsSafetyService,
+    WebhookService = WebhookService,
+    PositionService = PositionService,
+    SprinklerService = SprinklerService,
+    PlantingService = PlantingService,
+})
 local GAG2 = {
     Runtime = runtime,
     Logger = Logger,
@@ -70,5 +92,6 @@ end
 
 Logger.info("Main", "Monolith fallback completed/started")
 return GAG2
+
 
 
