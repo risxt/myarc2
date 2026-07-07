@@ -1,4 +1,4 @@
-﻿-- integration.disabled.lua
+-- integration.disabled.lua
 -- Disabled-by-default production integration sketch for GAG2 APS.
 -- Do not paste into gag2.lua until parity review and manual tests are ready.
 

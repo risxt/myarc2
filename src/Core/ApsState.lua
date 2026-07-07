@@ -1,4 +1,4 @@
-﻿-- ApsState.lua
+-- ApsState.lua
 -- Logical state model for APS lifecycle. Skeleton only; not production-wired yet.
 
 local ApsState = {

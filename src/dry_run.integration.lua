@@ -1,4 +1,4 @@
-﻿-- dry_run.integration.lua
+-- dry_run.integration.lua
 -- Dry-run integration harness for GAG2 modules.
 -- Purpose: load/init modules and validate dependency shape without replacing old APS.
 

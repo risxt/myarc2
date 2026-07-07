@@ -1,4 +1,4 @@
-﻿-- ReleaseMode.lua
+-- ReleaseMode.lua
 -- Controls whether GAG2 runs hybrid fallback or pure modular mode.
 
 local ReleaseMode = {}

@@ -1,4 +1,4 @@
-﻿-- PlantingService.lua (REWRITE)
+-- PlantingService.lua (REWRITE)
 -- Handles auto-planting logic based on empty spots and settings.
 local PlantingService = {}
 local running = false

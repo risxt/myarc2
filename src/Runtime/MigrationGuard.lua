@@ -1,4 +1,4 @@
-﻿-- MigrationGuard.lua
+-- MigrationGuard.lua
 -- Runtime guard to prevent false 100% migration claims.
 
 local MigrationGuard = {}

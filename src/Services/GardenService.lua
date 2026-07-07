@@ -1,4 +1,4 @@
-﻿-- GardenService.lua
+-- GardenService.lua
 -- Shared garden, readiness, threshold, and lightweight scan helpers.
 -- Keep parity with current gag2.lua before production wiring.
 

@@ -1,4 +1,4 @@
-﻿return {
+return {
     version = "GAG2",
     percent = 100,
     fallbackRequired = false,

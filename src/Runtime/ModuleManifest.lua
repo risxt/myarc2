@@ -1,4 +1,4 @@
-﻿-- ModuleManifest.lua
+-- ModuleManifest.lua
 -- Single source of truth for modules loaded by the modular runtime.
 
 local ModuleManifest = {}

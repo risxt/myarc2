@@ -1,4 +1,4 @@
-﻿-- MonolithBridge.lua
+-- MonolithBridge.lua
 -- Temporary bridge while migrating from gag2.live.lua to fully modular services.
 -- Owns fallback execution and exposes honest migration metadata.
 

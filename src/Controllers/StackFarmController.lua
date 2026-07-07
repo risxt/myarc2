@@ -1,4 +1,4 @@
-﻿-- StackFarmController.lua
+-- StackFarmController.lua
 -- Modular Stack Farm manager ported from gag2.lua.
 local StackFarmController = {}
 local running = false

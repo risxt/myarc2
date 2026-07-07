@@ -1,4 +1,4 @@
-﻿-- PositionService.lua
+-- PositionService.lua
 -- Owns saved position resolution for APS/tool placement.
 
 local PositionService = {}

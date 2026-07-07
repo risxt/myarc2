@@ -1,4 +1,4 @@
-﻿-- LiveReadinessGate.lua
+-- LiveReadinessGate.lua
 -- Hard gate before claiming production modular completion.
 
 local LiveReadinessGate = {}

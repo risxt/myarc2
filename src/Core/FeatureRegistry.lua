@@ -1,4 +1,4 @@
-﻿-- FeatureRegistry.lua
+-- FeatureRegistry.lua
 -- Tracks feature migration status at runtime.
 
 local FeatureRegistry = {}

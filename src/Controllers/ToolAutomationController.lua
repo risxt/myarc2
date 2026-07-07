@@ -1,4 +1,4 @@
-﻿-- ToolAutomationController.lua (REWRITE)
+-- ToolAutomationController.lua (REWRITE)
 -- Modular tool automation: equip/activate + auto sprinkler + watering can + trowel + shovel + favorite.
 local ToolAutomationController = {}
 local running = {}

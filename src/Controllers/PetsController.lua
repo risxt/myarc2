@@ -1,4 +1,4 @@
-﻿-- PetsController.lua
+-- PetsController.lua
 -- Modular Auto Pets controller ported from gag2.lua Auto Pets section.
 
 local PetsController = {}

@@ -1,4 +1,4 @@
-﻿-- AutoSellController.lua
+-- AutoSellController.lua
 -- Modular Auto Sell controller ported from gag2.lua Auto Sell section.
 
 local AutoSellController = {}

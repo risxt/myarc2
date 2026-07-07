@@ -1,4 +1,4 @@
-﻿-- UIRegistry.lua
+-- UIRegistry.lua
 -- Keeps UI section/control registration separate from feature logic.
 
 local UIRegistry = {}

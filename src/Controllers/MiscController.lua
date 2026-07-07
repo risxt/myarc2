@@ -1,4 +1,4 @@
-﻿-- MiscController.lua (REWRITE)
+-- MiscController.lua (REWRITE)
 -- Modular controller: Anti-fling, Noclip plants, Hide plants/fruits, Prompts, Gardens, Auto Hop
 local MiscController = {}
 local running = false

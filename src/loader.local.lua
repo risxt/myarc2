@@ -1,4 +1,4 @@
-﻿-- loader.local.lua
+-- loader.local.lua
 -- Local prototype loader for GAG2 modules.
 -- This file is for structure/load-order design only; it is not production autoexecute yet.
 

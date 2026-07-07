@@ -1,4 +1,4 @@
-﻿-- ParityReportService.lua
+-- ParityReportService.lua
 -- Runtime-readable migration/parity report generator.
 
 local ParityReportService = {}

@@ -1,4 +1,4 @@
-﻿-- RuntimeContext.lua
+-- RuntimeContext.lua
 -- Collects Roblox/executor dependencies for modular GAG2.
 
 local RuntimeContext = {}

@@ -1,4 +1,4 @@
-﻿-- ShopController.lua
+-- ShopController.lua
 -- Modular Auto Shop controller ported from gag2.lua Auto Shop section.
 
 local ShopController = {}

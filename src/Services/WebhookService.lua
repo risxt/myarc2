@@ -1,4 +1,4 @@
-﻿-- WebhookService.lua
+-- WebhookService.lua
 -- APS notification service. Webhook is observer-only and never controls APS logic.
 
 local WebhookService = {}

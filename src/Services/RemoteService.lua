@@ -1,4 +1,4 @@
-﻿-- RemoteService.lua
+-- RemoteService.lua
 -- Central remote lookup and safe fire helpers.
 
 local RemoteService = {}

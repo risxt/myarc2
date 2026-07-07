@@ -1,4 +1,4 @@
-﻿-- AutoCollectController.lua (REWRITE)
+-- AutoCollectController.lua (REWRITE)
 -- Modular controller: weather seed collect + reactive instant collect + dropped items.
 local AutoCollectController = {}
 local running = false

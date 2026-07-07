@@ -1,4 +1,4 @@
-﻿-- RuntimeDiagnostics.lua
+-- RuntimeDiagnostics.lua
 -- Lightweight diagnostics for loaded modular runtime.
 local RuntimeDiagnostics = {}
 function RuntimeDiagnostics.init(deps)

@@ -1,4 +1,4 @@
-﻿-- HttpRequestService.lua
+-- HttpRequestService.lua
 -- Central executor HTTP request adapter.
 
 local HttpRequestService = {}

@@ -1,4 +1,4 @@
-﻿-- ApsSafetyService.lua
+-- ApsSafetyService.lua
 -- APS safety module. Ported from gag2.lua safety behavior, but not production-wired yet.
 -- Invariant: APS must never teleport/rejoin without reverse safety.
 

@@ -1,4 +1,4 @@
-﻿-- StartupValidator.lua
+-- StartupValidator.lua
 -- Validates that critical modular pieces are present before/after startup.
 
 local StartupValidator = {}

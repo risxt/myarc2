@@ -1,4 +1,4 @@
-﻿-- ConfigService.lua
+-- ConfigService.lua
 -- Production-oriented config service skeleton for GAG2.
 -- Still needs exact monolith key/default parity before replacing live config.
 

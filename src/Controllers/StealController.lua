@@ -1,4 +1,4 @@
-﻿-- StealController.lua
+-- StealController.lua
 -- Modular Auto Steal controller ported from gag2.lua Auto Steal section.
 
 local StealController = {}

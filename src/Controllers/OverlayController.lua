@@ -1,4 +1,4 @@
-﻿-- OverlayController.lua (REWRITE)
+-- OverlayController.lua (REWRITE)
 -- Modular overlay/ESP controller with tracked GUI ownership: ESP labels, Weather HUD, Inventory Value.
 local OverlayController = {}
 local running = {}

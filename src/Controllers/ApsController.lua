@@ -1,4 +1,4 @@
-﻿-- ApsController.lua
+-- ApsController.lua
 -- APS controller module. Branch-by-branch extraction target; not production-wired yet.
 
 local ApsController = {}

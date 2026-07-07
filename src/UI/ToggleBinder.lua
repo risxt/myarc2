@@ -1,4 +1,4 @@
-﻿-- ToggleBinder.lua
+-- ToggleBinder.lua
 -- Standardizes UI toggle callbacks to controller methods.
 
 local ToggleBinder = {}

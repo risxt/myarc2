@@ -1,4 +1,4 @@
-﻿-- MailController.lua
+-- MailController.lua
 -- Modular Auto Mail send/claim controller ported from gag2.lua mail flow.
 local MailController = {}
 local sending = false

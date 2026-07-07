@@ -1,4 +1,4 @@
-﻿-- LocalPlayerController.lua (REWRITE)
+-- LocalPlayerController.lua (REWRITE)
 -- Modular controller: Walkspeed, Noclip, Inf Jump, Player Freeze.
 local LocalPlayerController = {}
 local running = false

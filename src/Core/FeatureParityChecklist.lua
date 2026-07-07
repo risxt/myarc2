@@ -1,4 +1,4 @@
-﻿-- FeatureParityChecklist.lua
+-- FeatureParityChecklist.lua
 -- Runtime-readable checklist used to prevent losing monolith feature branches.
 local FeatureParityChecklist = {}
 FeatureParityChecklist.Items = {

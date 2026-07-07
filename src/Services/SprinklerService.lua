@@ -1,4 +1,4 @@
-﻿-- SprinklerService.lua
+-- SprinklerService.lua
 -- Adapter/wrapper for sprinkler placement.
 
 local SprinklerService = {}

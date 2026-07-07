@@ -1,4 +1,4 @@
-﻿-- Logger.lua
+-- Logger.lua
 -- Lightweight logger skeleton for GAG2 modules.
 
 local Logger = {}

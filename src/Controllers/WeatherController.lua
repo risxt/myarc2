@@ -1,4 +1,4 @@
-﻿-- WeatherController.lua
+-- WeatherController.lua
 -- Modular Weather Predict + Auto Weather Disconnect controller.
 
 local WeatherController = {}

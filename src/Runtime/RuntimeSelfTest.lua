@@ -1,4 +1,4 @@
-﻿-- RuntimeSelfTest.lua
+-- RuntimeSelfTest.lua
 -- Non-destructive runtime self-test for modular infrastructure.
 
 local RuntimeSelfTest = {}

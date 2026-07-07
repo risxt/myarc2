@@ -1,4 +1,4 @@
-﻿-- loader.github.lua
+-- loader.github.lua
 -- Remote GitHub loader template for GAG2. Not production active yet.
 
 local GAG2Loader = {}
