@@ -6,20 +6,10 @@ backuputama.lua
 node_modules/
 *.cjs
 
-# Bundle (local only)
+# Bundle (local build artifact)
 gag2_modular_bundled.lua
 
-# Docs & tests (local dev only)
-docs/
-tests/
-
-# Modular src (WIP, not production)
-src/
-
-# Old migration docs
-APS_PARITY_MATRIX.md
-DEPENDENCY_MAP.md
-FULL_MIGRATION_TRACKER.md
-MIGRATION_PROGRESS.md
-PROJECT_BRAIN.md
-ROADMAP.md
+# Temp scripts
+check_syntax.lua
+fix_*.cjs
+check*.cjs

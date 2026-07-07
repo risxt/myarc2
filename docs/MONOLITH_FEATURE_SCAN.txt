@@ -1,0 +1,250 @@
+﻿17: -- ==============================================
+18: -- [ CONFIG MAPPING ]
+22: -- ==============================================
+103: task.spawn(function()
+227: task.spawn(function()
+1368: function Item:AddButton(Config)
+1479: function Item:AddToggle(Config)
+1849: function Item:AddInput(Config)
+1974: function Item:AddDropdown(Config)
+2353: -- ================================================================
+2355: -- ================================================================
+2504: task.spawn(function()
+2748: task.spawn(function()
+2762: task.spawn(function()
+3247: task.spawn(function()
+3262: task.spawn(function()
+3273: task.spawn(function()
+3370: task.spawn(function()
+3689: task.spawn(function()
+3772: -- ==================== REACTIVE INSTANT COLLECT ====================
+3773: task.spawn(function()
+3893: task.spawn(function()
+4031: task.spawn(function()
+4062: -- ==================== AUTO COLLECT WEATHER SEEDS ====================
+4063: task.spawn(function()
+4155: task.spawn(function()
+4202: task.spawn(function()
+4218: -- ==================== AUTO SELL ====================
+4219: task.spawn(function()
+4343: -- ==================== AUTO SHOP ====================
+4344: task.spawn(function()
+4421: -- ==================== AUTO STEAL ====================
+4422: task.spawn(function()
+4474: task.spawn(function()
+4490: task.spawn(function()
+4534: -- ==================== AUTO PETS ====================
+4535: task.spawn(function()
+4589: -- ==================== AUTO MAIL SEND ====================
+5015: -- ==================== AUTO MAIL CLAIM ====================
+5061: task.spawn(function()
+5070: -- ==================== STACK FARM MANAGER ====================-- ==================== STACK FARM MANAGER ====================
+5076: task.spawn(function()
+5593: task.spawn(function()
+5766: -- ==================== AUTO SPRINKLER ====================
+5767: task.spawn(function()
+5906: -- ==================== AUTO WATERING CAN ====================
+5907: task.spawn(function()
+5932: task.spawn(function()
+6067: -- ==================== AUTO TROWEL ====================
+6068: task.spawn(function()
+6137: -- ==================== AUTO SHOVEL ====================
+6138: task.spawn(function()
+6224: -- ==================== AUTO FAVORITE ====================
+6225: task.spawn(function()
+6277: -- ==================== ESP ====================
+6448: task.spawn(function()
+6450: task.spawn(function()
+6456: task.spawn(function()
+6482: task.spawn(function()
+6514: -- ==================== MISC ====================
+6546: task.spawn(function()
+6620: task.spawn(function()
+6642: task.spawn(function()
+6738: task.spawn(function()
+6754: -- ==================== AUTO PLANTS ====================
+6756: task.spawn(function()
+7022: -- ==================== LOCAL PLAYER FEATURES ====================
+7038: task.spawn(function()
+7070: -- ==================== WEATHER PREDICT ====================
+7123: -- ==================== AUTO WEATHER DISCONNECT ====================
+7202: task.spawn(function()
+7228: -- ==================== WEATHER BAR HUD ====================
+7360: task.spawn(function()
+7376: -- ==================== INVENTORY VALUE OVERLAY ====================
+7494: task.spawn(function()
+7537: -- ==================== UI ====================
+7548: -- ==================== TAB: HOME ====================
+7553: DiscordSec:AddButton({ Title = "Discord Invite", Content = "Copy invite link to clipboard",
+7559: LocalSec:AddInput({ Title = "Set Speed", Content = "Walkspeed value (default: 16)",
+7561: LocalSec:AddToggle({ Title = "Enable Walkspeed", Default = false,
+7567: LocalSec:AddToggle({ Title = "No Clip", Default = false,
+7569: LocalSec:AddToggle({ Title = "Infinite Jump", Default = false,
+7577: task.spawn(function()
+7590: -- ==================== TAB: MAIN ====================
+7596: AutoCollSec:AddToggle({ Title = "Disable Teleport", Default = Cfg.disableTp,
+7598: AutoCollSec:AddToggle({ Title = "Stop Collect If Backpack Is Full Max", Default = Cfg.stopIfFull,
+7600: AutoCollSec:AddInput({ Title = "Delay To Collect", Content = "If you don't want use this, just input '0'", Default = tostring(Cfg.delay),
+7603: AutoCollSec:AddDropdown({ Title = "Select Fruit", Multi = true, Default = savedDropdown("selFruit"),
+7606: AutoCollSec:AddDropdown({ Title = "Select Rarity", Multi = true, Default = savedDropdown("selRarity"),
+7609: AutoCollSec:AddDropdown({ Title = "Low KG Mutations", Content = "Mutations to collect with the Low KG rule. Use None for no mutation", Multi = true, Default = savedDropdown("lowKgMut"),
+7612: AutoCollSec:AddDropdown({ Title = "Low KG Mode", Default = savedDropdown("lowKgMode"),
+7615: AutoCollSec:AddInput({ Title = "Low KG Threshold", Content = "Example: None + Gold Below 40", Default = tostring(Cfg.lowKgThresh),
+7617: AutoCollSec:AddDropdown({ Title = "High KG Mutations", Content = "Mutations to collect with the High KG rule", Multi = true, Default = savedDropdown("highKgMut"),
+7620: AutoCollSec:AddDropdown({ Title = "High KG Mode", Default = savedDropdown("highKgMode"),
+7623: AutoCollSec:AddInput({ Title = "High KG Threshold", Content = "Example: Starstruck/Frozen Above 10", Default = tostring(Cfg.highKgThresh),
+7625: AutoCollSec:AddDropdown({ Title = "Wait Mutation Fruit", Content = "Selected fruits above KG will stay until any mutation appears", Multi = true, Default = savedDropdown("selWaitMutationFruit"),
+7628: AutoCollSec:AddInput({ Title = "Wait Mutation Above KG", Content = "No-mutation selected fruits at/above this KG stay. Mutated ones can collect. 0 = off", Default = tostring(Cfg.waitMutationAboveKg),
+7630: AutoCollSec:AddToggle({ Title = "Auto Collect Fruit", Default = Cfg.autoCollectFruit,
+7632: AutoCollSec:AddToggle({ Title = "Auto Collect All Fruit", Default = Cfg.autoCollectAll,
+7634: AutoCollSec:AddInput({ Title = "Min Value (Best Collect)", Content = "Auto Collect Best: hanya collect jika value >= ini. 0 = mutation/Legendary+", Default = tostring(Cfg.collectBestMinValue),
+7636: AutoCollSec:AddToggle({ Title = "Auto Collect Best Fruit", Default = Cfg.autoCollectBest,
+7639: AutoCollSec:AddToggle({ Title = "Auto Collect Dropped Item", Default = Cfg.autoDropped,
+7642: AutoCollSec:AddToggle({ Title = "Auto Collect Gold Seed", Default = Cfg.autoGoldSeed,
+7644: AutoCollSec:AddToggle({ Title = "Auto Collect Rainbow Seed", Default = Cfg.autoRainbowSeed,
+7646: AutoCollSec:AddToggle({ Title = "Auto Attack Nearby Players", Content = "Requires Shovel or Crowbar equipped", Default = Cfg.autoAttack,
+7685: AutoPlantSec:AddToggle({ Title = "Disable Teleport", Default = Cfg.disablePlantTp,
+7688: AutoPlantSec:AddDropdown({ Title = "Select Seeds", Default = savedDropdown("plantSeedName"),
+7691: AutoPlantSec:AddDropdown({ Title = "Select Position", Default = savedDropdown("plantPosition"),
+7694: local _plantSprinklerDropdown = AutoPlantSec:AddDropdown({ Title = "Select Sprinkler For Plants",
+7699: AutoPlantSec:AddButton({ Title = "Refresh Sprinkler List", Content = "Reload placed sprinklers for Sprinkler Radius planting",
+7710: AutoPlantSec:AddButton({ Title = "Save Position", Content = "Saves your current position as planting reference",
+7715: AutoPlantSec:AddInput({ Title = "Delay To Plants", Content = "Seconds between each plant (default 0.1)", Default = tostring(Cfg.plantDelay),
+7717: AutoPlantSec:AddToggle({ Title = "Require Active Sprinkler", Content = "When enabled, Auto Plant Seed will pause if no sprinkler is active", Default = Cfg.plantRequireSprinkler,
+7719: AutoPlantSec:AddToggle({ Title = "Auto Plants Seed", Content = "Plants selected seed in empty spots", Default = Cfg.autoPlantSeed,
+7721: AutoPlantSec:AddToggle({ Title = "Auto Plants All Seeds", Content = "Cycles through all seeds in backpack", Default = Cfg.autoPlantAll,
+7725: AutoSellSec:AddInput({ Title = "Delay To Sell Inventory", Content = "Seconds between each sell cycle (0 = fastest)", Default = tostring(Cfg.sellDelay),
+7727: AutoSellSec:AddToggle({ Title = "Allow Sell If Backpack Is Max", Content = "Only auto-sell when backpack has 5+ fruits", Default = Cfg.sellIfFull,
+7729: AutoSellSec:AddToggle({ Title = "Allows Bargain Inventory", Content = "AskBidAll before selling for better price", Default = Cfg.sellBargain,
+7731: AutoSellSec:AddToggle({ Title = "Use Daily Deal", Content = "Use daily deal multiplier when active", Default = Cfg.sellDailyDeal,
+7734: AutoSellSec:AddToggle({ Title = "Auto Sell All", Content = "Auto sell entire inventory on a timer", Default = Cfg.autoSellAll,
+7736: AutoSellSec:AddButton({ Title = "Sell All", Content = "Immediately sell all inventory",
+7741: AutoSellSec:AddDropdown({ Title = "Select Sell Fruit", Multi = true, Default = savedDropdown("selSellFruit"),
+7744: AutoSellSec:AddDropdown({ Title = "Select Sell Rarity", Multi = true, Default = savedDropdown("selSellRarity"),
+7747: AutoSellSec:AddDropdown({ Title = "Select Sell Mutation", Multi = true, Default = savedDropdown("selSellMut"),
+7750: AutoSellSec:AddDropdown({ Title = "Select Threshold Mode", Default = savedDropdown("selSellThresh"),
+7753: AutoSellSec:AddInput({ Title = "Weight Threshold", Content = "Min/max weight in kg for threshold filter", Default = tostring(Cfg.sellWeightThresh),
+7755: AutoSellSec:AddInput({ Title = "Sell Below Value", Content = "Sell fruit if value <= this. Supports 1k/1m/1b. 0 = off", Default = tostring(Cfg.sellValueBelow),
+7769: AutoSellSec:AddToggle({ Title = "Auto Sell Fruit", Content = "Auto sell fruits matching filter", Default = Cfg.autoSellFruit,
+7772: AutoSellSec:AddDropdown({ Title = "Select Pets", Multi = true, Default = savedDropdown("selSellPet"),
+7775: AutoSellSec:AddDropdown({ Title = "Select Rarity Pets", Multi = true, Default = savedDropdown("selSellPetRarity"),
+7778: AutoSellSec:AddDropdown({ Title = "Select Size Pets", Multi = true, Default = savedDropdown("selSellPetSize"),
+7781: AutoSellSec:AddToggle({ Title = "Auto Sell Pets", Content = "Auto sell pets matching filter", Default = Cfg.autoSellPets,
+7785: AutoStealSec:AddInput({ Title = "Steal Delay", Content = "Seconds between each steal cycle (min 0.5)", Default = tostring(Cfg.stealDelay),
+7787: AutoStealSec:AddDropdown({ Title = "Select Filter", Default = { "Select Options" },
+7790: AutoStealSec:AddDropdown({ Title = "Select Fruit", Multi = true, Default = savedDropdown("selStealFruit"),
+7793: AutoStealSec:AddDropdown({ Title = "Select Rarity", Multi = true, Default = savedDropdown("selStealRarity"),
+7796: AutoStealSec:AddDropdown({ Title = "Select Mutation", Multi = true, Default = savedDropdown("selStealMut"),
+7799: AutoStealSec:AddToggle({ Title = "Fling Player To Unlock Garden", Content = "Continuously fling all other players upward", Default = Cfg.flingPlayers,
+7801: AutoStealSec:AddToggle({ Title = "Auto Steal Fruit", Content = "Auto steal fruits from other players at night", Default = Cfg.autoSteal,
+7803: AutoStealSec:AddToggle({ Title = "Auto Steal Best Fruit", Content = "Auto steal mutated or Legendary+ fruits at night", Default = Cfg.autoStealBest,
+7805: AutoStealSec:AddToggle({ Title = "Auto Hit Player Stolen", Content = "Auto fire HitPlayer on anyone carrying stolen fruit", Default = Cfg.autoHitStolen,
+7817: task.spawn(function()
+7842: AutoMailSec:AddInput({ Title = "Mail Recipient Username", Content = "Roblox username to send items to", Default = tostring(Cfg.mailTarget or ""),
+7847: AutoMailSec:AddDropdown({ Title = "Mail Category", Content = "General mail only. Fruits use the Mail Fruits section below", Default = savedDropdown("mailCategory"),
+7856: mailItemDropdown = AutoMailSec:AddDropdown({ Title = "Mail Item", Content = "Select/unselect backpack items to send", Multi = true, Default = savedDropdown("mailItemKey"),
+7861: AutoMailSec:AddInput({ Title = "Mail Count", Content = "How many stackable items to send", Default = tostring(Cfg.mailCount),
+7863: AutoMailSec:AddInput({ Title = "Batch Size", Content = "Max item slots per SendBatch (Bypass = 999999)", Default = tostring(Cfg.mailBatchSize or 20),
+7865: AutoMailSec:AddInput({ Title = "Delay", Content = "Delay between internal batches, minimum 9 seconds", Default = tostring(Cfg.mailDelay),
+7867: local mailStartToggle = AutoMailSec:AddToggle({ Title = "Auto / Start Mail Send", Content = "Runs current mail config, then turns itself off", Default = Cfg.autoMailSend,
+7877: AutoMailSec:AddToggle({ Title = "Auto Claim Mail Inbox", Content = "Automatically claims all incoming items/seeds from mailbox every 10s", Default = Cfg.autoMailClaim,
+7892: AutoMailFruitSec:AddInput({ Title = "Mail To (Username)", Content = "Same target as Mail Send", Default = tostring(Cfg.mailTarget or ""),
+7894: AutoMailFruitSec:AddInput({ Title = "Total Sheckles", Content = "Example: 300m. Sends fruits from lowest value upward until target is reached", Default = tostring(Cfg.mailFruitValueTarget or ""),
+7896: AutoMailFruitSec:AddInput({ Title = "Max Fruits", Content = "Maximum fruits used to reach target value", Default = tostring(Cfg.mailCount),
+7898: AutoMailFruitSec:AddInput({ Title = "Filter: Min Fruit Value", Content = "E.g. 500k. Only sends fruits worth >= this.", Default = tostring(Cfg.mailFruitMinValue or "0"),
+7900: AutoMailFruitSec:AddInput({ Title = "Filter: Max Fruit Value", Content = "E.g. 10m. Only sends fruits worth <= this.", Default = tostring(Cfg.mailFruitMaxValue or "999q"),
+7902: mailFruitToggle = AutoMailFruitSec:AddToggle({ Title = "Auto / Start Mail Fruits", Content = "If Total Sheckles is filled: send low-value fruits until target. If blank/0: send all fruits up to Max Fruits.", Default = false,
+7926: AutoPetsSec:AddInput({ Title = "Buy Pet Delay", Content = "Seconds between each tame attempt (min 1)", Default = tostring(Cfg.buyPetDelay),
+7928: AutoPetsSec:AddDropdown({ Title = "Select Pets", Multi = true, Default = savedDropdown("selBuyPet"),
+7931: AutoPetsSec:AddDropdown({ Title = "Select Rarity Pets", Multi = true, Default = savedDropdown("selBuyPetRarity"),
+7934: AutoPetsSec:AddDropdown({ Title = "Select Size Pets", Multi = true, Default = savedDropdown("selBuyPetSize"),
+7937: AutoPetsSec:AddToggle({ Title = "Auto Buy Pet", Content = "Auto tame wild pets matching filter", Default = Cfg.autoBuyPet,
+7941: StackFarmSec:AddToggle({ Title = "Enable Stack Farming", Content = "Run Sprinkler/Trowel/Shovel automations in sequential priority order", Default = Cfg.stackFarm,
+7943: StackFarmSec:AddDropdown({ Title = "Priority 1", Default = { "Sprinkler" },
+7949: StackFarmSec:AddDropdown({ Title = "Priority 2", Default = { "Trowel" },
+7955: StackFarmSec:AddDropdown({ Title = "Priority 3", Default = { "Shovel" },
+7963: -- ==================== TAB: AUTOMATICALLY ====================
+7969: AutoPlantScanSec:AddToggle({ Title = "Enable Auto Plant Scan", Content = "Reverse -> sprinkler at saved position -> plant -> scan KG -> cancel reverse on success / rejoin on fail", Default = (Cfg.apsResume or Cfg.autoPlantScan),
+7983: AutoPlantScanSec:AddToggle({ Title = "Disable Teleport", Content = "Forced ON by this mode so your character stays still", Default = true,
+7985: AutoPlantScanSec:AddDropdown({ Title = "Select Seed", Default = savedDropdown("apsSeedName"),
+7988: AutoPlantScanSec:AddDropdown({ Title = "Scan Crop Name", Default = savedDropdown("apsCropName"),
+7991: AutoPlantScanSec:AddDropdown({ Title = "Select Sprinkler", Default = savedDropdown("apsSprinkler"),
+7994: AutoPlantScanSec:AddInput({ Title = "Weight Threshold (kg)", Content = "Success when scanned crop passes this KG", Default = tostring(Cfg.apsWeightThresh),
+7996: AutoPlantScanSec:AddDropdown({ Title = "Threshold Mode", Default = savedDropdown("apsThreshMode"),
+7999: AutoPlantScanSec:AddInput({ Title = "Plant Amount Per Cycle", Content = "Fixed max seeds to plant inside selected sprinkler radius", Default = tostring(Cfg.apsPlantAmount),
+8001: AutoPlantScanSec:AddInput({ Title = "APS Webhook URL", Content = "Discord webhook for every detected target crop scan", Default = tostring(Cfg.apsWebhookUrl or ""),
+8007: AutoPlantScanSec:AddToggle({ Title = "APS Webhook", Content = "Send Discord embed when target crop is detected, including below-threshold results", Default = Cfg.apsWebhook,
+8013: AutoPlantScanSec:AddButton({ Title = "Test APS Webhook", Content = "Send a test Auto Plant Scan embed now",
+8017: AutoPlantScanSec:AddButton({ Title = "Use Current Position", Content = "Save current position as sprinkler/plant target for this account",
+8043: AutoSprinklerSec:AddToggle({ Title = "Disable Teleport", Default = Cfg.disableTp,
+8045: AutoSprinklerSec:AddInput({ Title = "Sprinkler Cycle Delay", Content = "Minutes to wait after placing selected sprinklers", Default = tostring(Cfg.sprinklerDelay),
+8047: AutoSprinklerSec:AddDropdown({ Title = "Select Sprinklers", Multi = true, Default = savedDropdown("selSprinkler"),
+8050: AutoSprinklerSec:AddDropdown({ Title = "Place Location", Default = savedDropdown("sprinklerPlaceMode"),
+8053: AutoSprinklerSec:AddDropdown({ Title = "Select Target Plant", Multi = true, Default = savedDropdown("selSprinklerPlant"),
+8056: AutoSprinklerSec:AddToggle({ Title = "Auto Place Sprinkler", Content = "Place one of each selected sprinkler, 1 second apart, then wait cycle delay", Default = Cfg.autoSprinkler,
+8065: AutoSprinklerSec:AddToggle({ Title = "Teleport To Placed Sprinkler", Content = "After placing sprinklers, teleport to one placed sprinkler", Default = Cfg.autoTpToSprinkler,
+8067: AutoSprinklerSec:AddButton({ Title = "Save Sprinkler Position", Content = "Save current coordinates for Saved Position placement",
+8091: AutoSprinklerSec:AddToggle({ Title = "Sprinkler Timer GUI", Content = "Show live remaining time for sprinklers on your plot", Default = Cfg.sprinklerTimerGui,
+8095: AutoWaterCanSec:AddInput({ Title = "Water Delay", Content = "Seconds between watering cycles (default 30)", Default = tostring(Cfg.waterCanDelay),
+8097: AutoWaterCanSec:AddInput({ Title = "Water Uses Per Cycle", Content = "How many times to use watering can every delay cycle (1-20)", Default = tostring(Cfg.waterCanUses),
+8099: AutoWaterCanSec:AddDropdown({ Title = "Select Watering Can", Multi = true, Default = savedDropdown("selWaterCan"),
+8102: AutoWaterCanSec:AddToggle({ Title = "Auto Watering Can", Content = "Only waters near placed selected sprinkler every delay seconds", Default = Cfg.autoWaterCan,
+8106: AutoTrowelSec:AddInput({ Title = "Delay To Trowel", Content = "Seconds between each move cycle (min 1)", Default = tostring(Cfg.trowelDelay),
+8108: AutoTrowelSec:AddDropdown({ Title = "Select Plant", Multi = true, Default = savedDropdown("selTrowelPlant"),
+8111: AutoTrowelSec:AddDropdown({ Title = "Select Position", Default = { "Player Position" },
+8114: AutoTrowelSec:AddButton({ Title = "Save Position", Content = "Save current HRP position as trowel target",
+8118: AutoTrowelSec:AddToggle({ Title = "Auto Trowel Plant", Content = "Auto move matching plants to target position (requires Trowel in backpack)", Default = Cfg.autoTrowel,
+8126: AutoShovelSec:AddInput({ Title = "Delay To Shovel Tree", Content = "Seconds between each tree shovel cycle (min 1)", Default = tostring(Cfg.shovelTreeDelay),
+8128: AutoShovelSec:AddDropdown({ Title = "Select Tree", Multi = true, Default = savedDropdown("selShovelTree"),
+8131: AutoShovelSec:AddDropdown({ Title = "Select Rarity Tree", Multi = true, Default = savedDropdown("selShovelTreeRarity"),
+8134: AutoShovelSec:AddDropdown({ Title = "Select Mutation Tree", Multi = true, Default = savedDropdown("selShovelTreeMut"),
+8137: AutoShovelSec:AddToggle({ Title = "Auto Shovel Tree", Content = "Permanently remove matching plants (requires Shovel in backpack/equipped)", Default = Cfg.autoShovelTree,
+8140: AutoShovelSec:AddInput({ Title = "Delay To Shovel Fruit", Content = "Seconds between each fruit shovel cycle (min 1)", Default = tostring(Cfg.shovelFruitDelay),
+8142: AutoShovelSec:AddDropdown({ Title = "Select Fruit", Multi = true, Default = savedDropdown("selShovelFruit"),
+8145: AutoShovelSec:AddDropdown({ Title = "Select Rarity", Multi = true, Default = savedDropdown("selShovelFruitRarity"),
+8148: AutoShovelSec:AddDropdown({ Title = "Select Mutation", Multi = true, Default = savedDropdown("selShovelFruitMut"),
+8151: AutoShovelSec:AddDropdown({ Title = "Select Threshold Mode", Default = savedDropdown("selShovelThreshMode"),
+8154: AutoShovelSec:AddInput({ Title = "Weight Threshold", Content = "Min/max weight for threshold filter", Default = tostring(Cfg.shovelWeightThresh),
+8156: AutoShovelSec:AddToggle({ Title = "Auto Shovel Fruit", Content = "Remove mature fruit matching filter (requires Shovel in backpack/equipped)", Default = Cfg.autoShovelFruit,
+8160: -- ==================== TAB: INVENTORY ====================
+8165: AutoFavSec:AddInput({ Title = "Favorite Delay", Content = "Seconds between each cycle (min 0.5)", Default = tostring(Cfg.favDelay),
+8167: AutoFavSec:AddDropdown({ Title = "Select Favorite Fruit", Multi = true, Default = savedDropdown("selFavFruit"),
+8170: AutoFavSec:AddDropdown({ Title = "Select Favorite Rarity", Multi = true, Default = savedDropdown("selFavRarity"),
+8173: AutoFavSec:AddDropdown({ Title = "Select Favorite Mutation", Multi = true, Default = savedDropdown("selFavMut"),
+8176: AutoFavSec:AddDropdown({ Title = "Select Threshold Mode", Default = savedDropdown("selFavThresh"),
+8179: AutoFavSec:AddInput({ Title = "Weight Threshold", Content = "Min/max weight for threshold filter", Default = tostring(Cfg.favWeightThresh),
+8181: AutoFavSec:AddToggle({ Title = "Auto Favorite Fruit", Content = "Auto-favorite fruits matching filter", Default = Cfg.autoFavFruit,
+8183: AutoFavSec:AddToggle({ Title = "Auto UnFavorite Fruit", Content = "Auto-unfavorite fruits matching filter", Default = Cfg.autoUnFavFruit,
+8185: AutoFavSec:AddToggle({ Title = "Auto UnFavorite All Fruit", Content = "Unfavorite every fruit in backpack", Default = Cfg.autoUnFavAll,
+8189: -- ==================== TAB: SHOP ====================
+8194: ShopSeedSec:AddInput({ Title = "Buy Delay", Content = "Seconds between each buy cycle (min 1)", Default = tostring(Cfg.buyShopDelay),
+8196: ShopSeedSec:AddDropdown({ Title = "Select Seed", Multi = true, Default = savedDropdown("selBuySeed"),
+8199: ShopSeedSec:AddToggle({ Title = "Auto Buy Seeds", Content = "Auto buy selected seed when in stock", Default = Cfg.autoBuySeed,
+8201: ShopSeedSec:AddToggle({ Title = "Auto Buy All Seeds", Content = "Auto buy every seed that is in stock", Default = Cfg.autoBuyAllSeeds,
+8205: ShopGearSec:AddDropdown({ Title = "Select Gear", Multi = true, Default = savedDropdown("selBuyGear"),
+8208: ShopGearSec:AddToggle({ Title = "Auto Buy Gear", Content = "Auto buy selected gear when in stock", Default = Cfg.autoBuyGear,
+8210: ShopGearSec:AddToggle({ Title = "Auto Buy All Gear", Content = "Auto buy every gear that is in stock", Default = Cfg.autoBuyAllGear,
+8214: ShopCrateSec:AddDropdown({ Title = "Select Crate", Multi = true, Default = savedDropdown("selBuyCrate"),
+8217: ShopCrateSec:AddToggle({ Title = "Auto Buy Crate", Content = "Auto buy selected crate when in stock", Default = Cfg.autoBuyCrate,
+8219: ShopCrateSec:AddToggle({ Title = "Auto Buy All Crates", Content = "Auto buy every crate that is in stock", Default = Cfg.autoBuyAllCrates,
+8224: FruitStockWebhookSec:AddInput({ Title = "Discord Webhook URL", Content = "Webhook for fruit stock price updates", Default = tostring(Cfg.fruitStockWebhookUrl or ""),
+8230: FruitStockWebhookSec:AddToggle({ Title = "Fruit Stock Webhook", Content = "Send now, then every 10-minute restock +5s", Default = Cfg.fruitStockWebhook,
+8232: FruitStockWebhookSec:AddButton({ Title = "Test Send Fruit Stock", Content = "Send current fruit stock to webhook now",
+8236: -- ==================== TAB: MISC ====================
+8241: ESPSec:AddDropdown({ Title = "Select ESP Fruit", Multi = true, Default = savedDropdown("selEspFruit"),
+8245: ESPSec:AddDropdown({ Title = "Select ESP Rarity", Multi = true, Default = savedDropdown("selEspRarity"),
+8249: ESPSec:AddDropdown({ Title = "Select ESP Mutation", Multi = true, Default = savedDropdown("selEspMut"),
+8253: ESPSec:AddDropdown({ Title = "ESP Kg Filter Mode", Content = "Above = show only >= threshold. Below = show only <= threshold. Blank = off", Default = savedDropdown("espKgMode"),
+8257: ESPSec:AddInput({ Title = "ESP Kg Threshold", Content = "Kg value for filter. 0 or blank = no filter", Default = tostring(Cfg.espKgThresh),
+8260: ESPSec:AddToggle({ Title = "ESP Fruit", Content = "Show labels above fruits ready to harvest on all plots", Default = Cfg.espFruit,
+8269: ESPSec:AddDropdown({ Title = "Select Pets", Multi = true, Default = savedDropdown("selEspPet"),
+8272: ESPSec:AddDropdown({ Title = "Select Rarity Pets", Multi = true, Default = savedDropdown("selEspPetRarity"),
+8275: ESPSec:AddDropdown({ Title = "Select Size Pets", Multi = true, Default = savedDropdown("selEspPetSize"),
+8278: ESPSec:AddToggle({ Title = "ESP Spawned Pets", Content = "Show labels above spawned pets in the world", Default = Cfg.espPet,
+8290: DebugSec:AddToggle({ Title = "Debug Collect", Content = "Print collect decision logs when enabled", Default = Cfg.debugCollect,
+8292: DebugSec:AddToggle({ Title = "Debug Shop", Content = "Print shop stock/buy logs when enabled", Default = Cfg.debugShop,
+8294: DebugSec:AddToggle({ Title = "Debug Sprinkler", Content = "Print sprinkler placement/missing-tool logs", Default = Cfg.debugSprinkler,
+8296: DebugSec:AddButton({ Title = "Audit Nearby Fruits", Content = "Print up to 30 fruit collect decisions without collecting",
+8301: DebugSec:AddButton({ Title = "Audit Shop Selection", Content = "Print selected shop items and stock without buying",
+8306: DebugSec:AddButton({ Title = "Print Config Summary", Content = "Print key automation toggles and selected bucket config",
+8313: DebugSec:AddButton({ Title = "Clear ESP Labels", Content = "Force remove all ESP labels",

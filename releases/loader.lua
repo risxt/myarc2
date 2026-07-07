@@ -1,7 +1,7 @@
--- GAG2 Safe Loader
--- Fetches gag2.live.lua from GitHub with error handling
+-- GAG2 Safe Modular Loader
+-- Fetches releases/main.lua from GitHub with explicit compile/runtime diagnostics.
 
-local URL = "https://raw.githubusercontent.com/risxt/myarc2/main/releases/gag2.live.lua"
+local URL = "https://raw.githubusercontent.com/risxt/myarc2/main/releases/main.lua?v=" .. tostring(os.time())
 
 local ok, source = pcall(function()
     return game:HttpGet(URL)
@@ -14,15 +14,20 @@ end
 
 if type(source) ~= "string" or #source < 100 then
     warn("[GAG2 Loader] Bad response. Length: " .. tostring(source and #source or "nil"))
-    warn("[GAG2 Loader] First 200 chars: " .. tostring(source and source:sub(1, 200) or "nil"))
+    warn("[GAG2 Loader] First 300 chars: " .. tostring(source and source:sub(1, 300) or "nil"))
     return
 end
 
-local fn, err = loadstring(source)
+local fn, compileErr = loadstring(source)
 if not fn then
-    warn("[GAG2 Loader] Compile error: " .. tostring(err))
+    warn("[GAG2 Loader] Compile error in releases/main.lua: " .. tostring(compileErr))
+    warn("[GAG2 Loader] First 300 chars: " .. source:sub(1, 300))
     return
 end
 
-print("[GAG2 Loader] Loaded " .. #source .. " bytes. Executing...")
-fn()
+print("[GAG2 Loader] Loaded modular main.lua (" .. #source .. " bytes). Executing...")
+
+local runOk, runtimeErr = pcall(fn)
+if not runOk then
+    warn("[GAG2 Loader] Runtime error in modular main.lua: " .. tostring(runtimeErr))
+end
