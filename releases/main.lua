@@ -28,6 +28,9 @@ local ConfigService = ModuleLoader.load("src/Core/ConfigService.lua")
 local GardenService = ModuleLoader.load("src/Services/GardenService.lua")
 local ApsSafetyService = ModuleLoader.load("src/Services/ApsSafetyService.lua")
 local WebhookService = ModuleLoader.load("src/Services/WebhookService.lua")
+local PositionService = ModuleLoader.load("src/Services/PositionService.lua")
+local SprinklerService = ModuleLoader.load("src/Services/SprinklerService.lua")
+local PlantingService = ModuleLoader.load("src/Services/PlantingService.lua")
 local ApsController = ModuleLoader.load("src/Controllers/ApsController.lua")
 
 local GAG2 = {
@@ -38,6 +41,9 @@ local GAG2 = {
     GardenService = GardenService,
     ApsSafetyService = ApsSafetyService,
     WebhookService = WebhookService,
+    PositionService = PositionService,
+    SprinklerService = SprinklerService,
+    PlantingService = PlantingService,
     ApsController = ApsController,
     ModularLive = true,
     FullyMigrated = false,
@@ -58,3 +64,4 @@ end
 
 Logger.info("Main", "Monolith fallback completed/started")
 return GAG2
+
