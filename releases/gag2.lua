@@ -3323,6 +3323,20 @@ local function sendCancelReversePacket()
     return ok
 end
 
+local function kickAfterApsSuccess(found)
+    local kg = found and tonumber(found.kg) or 0
+    local mutation = found and tostring(found.mutation or "None") or "None"
+    local crop = tostring(Cfg.apsCropName or "target")
+    local msg = ("Auto Plant Scan success: %s %.2fkg %s. Leaving game; no reconnect scheduled."):format(crop, kg, mutation)
+    traceAPS("success_kick_no_reconnect", msg)
+    task.defer(function()
+        task.wait(0.25)
+        pcall(function()
+            LocalPlayer:Kick(msg)
+        end)
+    end)
+end
+
 -- Saved sprinkler position is manual-only. It is used as a Place Location target
 -- and never teleports the character on execute/rejoin.
 
@@ -5678,7 +5692,8 @@ task.spawn(function()
                     Cfg.autoPlantScan = false
                     Cfg.apsResume = false
                     saveConfigNow()
-                    setStatus(("Auto Plant Scan success: %s %.2fkg %s [%s] — stopped"):format(tostring(Cfg.apsCropName), tonumber(found.kg) or 0, tostring(found.mutation or "None"), tostring(found.type or "?")))
+                    setStatus(("Auto Plant Scan success: %s %.2fkg %s [%s] — leaving game"):format(tostring(Cfg.apsCropName), tonumber(found.kg) or 0, tostring(found.mutation or "None"), tostring(found.type or "?")))
+                    kickAfterApsSuccess(found)
                     return
                 end
 
