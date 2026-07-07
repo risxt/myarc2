@@ -3,7 +3,7 @@
 | Controller | Has fallback marker | Status |
 |---|---:|---|
 | ApsController.lua | no | PORTING/DRAFT |
-| AutoCollectController.lua | yes | BLOCKED |
+| AutoCollectController.lua | no | PORTING/DRAFT |
 | AutoSellController.lua | no | PORTING/DRAFT |
 | LocalPlayerController.lua | no | PORTING/DRAFT |
 | MailController.lua | yes | BLOCKED |
@@ -13,11 +13,11 @@
 | ShopController.lua | no | PORTING/DRAFT |
 | StackFarmController.lua | yes | BLOCKED |
 | StealController.lua | no | PORTING/DRAFT |
-| ToolAutomationController.lua | yes | BLOCKED |
+| ToolAutomationController.lua | no | PORTING/DRAFT |
 | WeatherController.lua | no | PORTING/DRAFT |
 
 ## Blocker Count
-5
+3
 
 ## Result
 NOT 100%
