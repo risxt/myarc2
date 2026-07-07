@@ -88,7 +88,7 @@ UIRegistry.init({ Logger = Logger })
 ToggleBinder.init({ Logger = Logger, ConfigService = ConfigService })
 AutoCollectController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
 AutoSellController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, LocalPlayer = runtime.LocalPlayer })
-ShopController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
+ShopController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry, ReplicatedStorage = runtime.ReplicatedStorage })
 MailController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
 PetsController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
 ToolAutomationController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
@@ -172,6 +172,7 @@ end
 
 Logger.info("Main", "Monolith fallback completed/started")
 return GAG2
+
 
 
 

@@ -10,14 +10,14 @@
 | MiscController.lua | yes | BLOCKED |
 | OverlayController.lua | yes | BLOCKED |
 | PetsController.lua | yes | BLOCKED |
-| ShopController.lua | yes | BLOCKED |
+| ShopController.lua | no | PORTING/DRAFT |
 | StackFarmController.lua | yes | BLOCKED |
 | StealController.lua | yes | BLOCKED |
 | ToolAutomationController.lua | yes | BLOCKED |
 | WeatherController.lua | yes | BLOCKED |
 
 ## Blocker Count
-10
+9
 
 ## Result
 NOT 100%
