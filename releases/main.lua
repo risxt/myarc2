@@ -22,6 +22,7 @@ local ModuleLoader = loadRemote("src/Runtime/ModuleLoader.lua")
 local RuntimeContext = ModuleLoader.load("src/Runtime/RuntimeContext.lua")
 local MonolithBridge = ModuleLoader.load("src/Runtime/MonolithBridge.lua")
 local MigrationGuard = ModuleLoader.load("src/Runtime/MigrationGuard.lua")
+local RuntimeDiagnostics = ModuleLoader.load("src/Runtime/RuntimeDiagnostics.lua")
 local runtime = RuntimeContext.build()
 
 local Logger = ModuleLoader.load("src/Core/Logger.lua")
@@ -41,6 +42,11 @@ local ToggleBinder = ModuleLoader.load("src/UI/ToggleBinder.lua")
 local AutoCollectController = ModuleLoader.load("src/Controllers/AutoCollectController.lua")
 local AutoSellController = ModuleLoader.load("src/Controllers/AutoSellController.lua")
 local ShopController = ModuleLoader.load("src/Controllers/ShopController.lua")
+local MailController = ModuleLoader.load("src/Controllers/MailController.lua")
+local PetsController = ModuleLoader.load("src/Controllers/PetsController.lua")
+local ToolAutomationController = ModuleLoader.load("src/Controllers/ToolAutomationController.lua")
+local WeatherController = ModuleLoader.load("src/Controllers/WeatherController.lua")
+local OverlayController = ModuleLoader.load("src/Controllers/OverlayController.lua")
 local ApsController = ModuleLoader.load("src/Controllers/ApsController.lua")
 
 
@@ -48,7 +54,8 @@ FeatureRegistry.init({ Logger = Logger })
 MonolithBridge.init({ Logger = Logger, ModuleLoader = ModuleLoader, fallbackPath = "releases/gag2.live.lua", enabled = true })
 MigrationGuard.init({ Logger = Logger, FeatureRegistry = FeatureRegistry,
     MonolithBridge = MonolithBridge,
-    MigrationGuard = MigrationGuard, MonolithBridge = MonolithBridge })
+    MigrationGuard = MigrationGuard,
+    RuntimeDiagnostics = RuntimeDiagnostics, MonolithBridge = MonolithBridge })
 HttpRequestService.init({ Logger = Logger, request = runtime.request, HttpService = runtime.HttpService })
 RemoteService.init({ Logger = Logger, ReplicatedStorage = runtime.ReplicatedStorage })
 ConfigService.init({ Logger = Logger, HttpService = runtime.HttpService })
@@ -63,6 +70,11 @@ ToggleBinder.init({ Logger = Logger, ConfigService = ConfigService })
 AutoCollectController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
 AutoSellController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
 ShopController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
+MailController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
+PetsController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
+ToolAutomationController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
+WeatherController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
+OverlayController.init({ Logger = Logger, FeatureRegistry = FeatureRegistry })
 ApsController.init({
     Logger = Logger,
     ConfigService = ConfigService,
@@ -82,6 +94,7 @@ local GAG2 = {
     FeatureRegistry = FeatureRegistry,
     MonolithBridge = MonolithBridge,
     MigrationGuard = MigrationGuard,
+    RuntimeDiagnostics = RuntimeDiagnostics,
     HttpRequestService = HttpRequestService,
     RemoteService = RemoteService,
     GardenService = GardenService,
@@ -95,13 +108,19 @@ local GAG2 = {
     AutoCollectController = AutoCollectController,
     AutoSellController = AutoSellController,
     ShopController = ShopController,
+    MailController = MailController,
+    PetsController = PetsController,
+    ToolAutomationController = ToolAutomationController,
+    WeatherController = WeatherController,
+    OverlayController = OverlayController,
     ApsController = ApsController,
     ModularLive = true,
     FullyMigrated = false,
-    MigrationPercent = 50,
+    MigrationPercent = 60,
 }
 
 _G.GAG2 = GAG2
+RuntimeDiagnostics.init({ Logger = Logger, GAG2 = GAG2 })
 
 Logger.info("Main", "GAG2 modular runtime loaded")
 Logger.warn("Main", "Feature migration is not complete; loading monolith fallback for full hub behavior")
@@ -114,6 +133,7 @@ end
 
 Logger.info("Main", "Monolith fallback completed/started")
 return GAG2
+
 
 
 
